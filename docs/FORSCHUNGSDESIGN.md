@@ -264,12 +264,11 @@ Das Projekt folgt dem Design-Science-Paradigma:
 - Titel: "Agentische KI zur Optimierung von Innovationsprozessen in Startups mit ungenutztem Innovationspotenzial: Ein Framework-Design und Mixed-Methods-Validierung"
 - Autor, Institution (HTWG), Datum, Betreuer
 
-**0.2 Abstract** (0,5 S.)
-- Problem: Startups verharren oft in der Exploitation, ungenutztes Innovationspotenzial bleibt unerschlossen
-- Gap: Kein Framework bildet agentische KI systematisch auf Innovationsphasen ab
-- Lösung: LOU-Framework (Hybrid aus BIG Picture, Lean Startup, JTBD, BMC) + Agenten-Architektur
-- Methode: Mixed Methods (Literaturanalyse + Szenario-Simulation + Expertenvalidierung)
-- Ergebnisse: Framework 2.0 + Evaluations-Erkenntnisse (Datenreifegrad-Effekt, Agent-Koordination, Human-in-the-Loop-Grenzen)
+**0.2 Abstract** (0,5 S.) → Siehe `docs/material/ABSTRACT.md`
+- Problem: Keine systematische Abbildung agentischer KI auf Innovationsphasen
+- Lösung: AIP-Framework mit eigenen Konzepten (OFH, Dissens-Signal, Startup Genome + IT-Score, Ethical Friction, Zwei-Schichten-Wissensarchitektur)
+- Methode: Mixed Methods mit Design-Science-Fundament + ClientZero Meta-Validierung
+- Graceful Degradation: Framework funktioniert auf jeder Datenlage
 
 **0.3 Zusammenfassung / Executive Summary** (0,5 S.)
 - 2-3 Abs. für Management-Leser (was ist der praktische Nutzen?)
