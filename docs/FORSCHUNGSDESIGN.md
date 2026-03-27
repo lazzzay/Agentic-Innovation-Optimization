@@ -521,7 +521,7 @@ Das Projekt folgt dem Design-Science-Paradigma:
 | Stufe | Name | Datenquellen | Agent-Modus | Output-Typ |
 |-------|------|-------------|-----------|-----------|
 | 1 | Minimal | Gründer-Gespräche, Notizen, Pitch Deck | Explorativer Modus: Fragen stellen | Strukturierte Fragen, Hypothesen |
-| 2 | Fragmentiert | CRM, Google Analytics, Social, E-Mails | Aggregations-Modus: Verbinden | Muster & Insights, aber lückenhaft |
+| 2 | Fragmentiert | CRM, Google Analytics, Social, E-Mails | Aggregation & Mustererkennung: Verbinden | Muster & Insights, aber lückenhaft |
 | 3 | Strukturiert | Sauberes CRM, Finanzen, Product Analytics, NPS | Analyse-Modus: Quantitativ | Belastbare Analysen mit Limitationen |
 | 4 | Datengetrieben | Data Warehouse, BI, A/B-Tests, APIs | Optimierungs-Modus: Prädiktiv | Konfidente Empfehlungen |
 

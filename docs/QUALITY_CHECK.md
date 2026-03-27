@@ -89,7 +89,7 @@ Das Projekt hat seit dem letzten Quality Check (8,5/10) substanzielle Fortschrit
 | Zielgruppe | "Startups mit ungenutztem Innovationspotenzial" | Identisch | Konsistent |
 | Phasen A-E | Erkennen, Ausrichten, Ideieren, Validieren, Kontrollieren | Identisch | Konsistent |
 | Agent-Governance | OFH (Orchestrated Feedback Hierarchy) | Referenziert | Konsistent |
-| Datenreifegrad Stufe 2 | "Aggregations-Modus" | "Muster-Erkennung" | **Noch nicht vereinheitlicht** |
+| Datenreifegrad Stufe 2 | "Aggregation & Mustererkennung" | "Aggregation & Mustererkennung" | Vereinheitlicht |
 | Dissens-Signal | Definiert in Kap. 5.4 | Referenziert in Kap. 6 | Konsistent |
 | Agent SDK | Kap. 10.5 | Future Work 6.5.3 | Konsistent |
 
@@ -125,18 +125,11 @@ Das Projekt hat seit dem letzten Quality Check (8,5/10) substanzielle Fortschrit
 
 ## 5. Noch offene Gaps
 
-### Gap 1: Datenreifegrad-Terminologie (Priorität: Mittel)
-- V3 Kap. 4 sagt "Aggregations-Modus" für Stufe 2
-- Forschungsdesign Kap. 3.7 sagt "Muster-Erkennung"
-- **TODO:** Vor Abgabe vereinheitlichen
+### ~~Gap 1: Datenreifegrad-Terminologie~~ — ERLEDIGT
+- Vereinheitlicht auf "Aggregation & Mustererkennung" in V3 + Forschungsdesign
 
-### Gap 2: Ressourcen-Realismus-Tabelle (Priorität: Hoch)
-- Framework definiert Konfigurationen, aber keine konkreten Zeitbudgets
-- **TODO:** 1-2 Seiten mit Best/Normal/Worst-Case pro Phase
-
-### Gap 3: Change-Management (Priorität: Mittel)
-- Trust-Building-Path fehlt
-- **TODO:** 1-2 Seiten zu Einführungsstrategie
+### ~~Gap 2: Change-Management~~ — ERLEDIGT
+- Kap. 12 in V3: Trust-Building-Path, Akzeptanz-Level, Governance-Kickoff
 
 ### Gap 4: ClientZero Phase D Metriken (Priorität: Hoch)
 - Metriken definiert aber noch nicht erhoben
@@ -153,7 +146,7 @@ Das Projekt hat seit dem letzten Quality Check (8,5/10) substanzielle Fortschrit
 ### Must-Do (vor Abgabe)
 1. **Ressourcen-Realismus-Tabelle** — Zeitbudgets pro Phase
 2. **ClientZero Phase D abschließen** — Metriken erheben, Abweichungen dokumentieren
-3. **Datenreifegrad-Terminologie** — "Aggregations-Modus" vs. "Muster-Erkennung" vereinheitlichen
+3. ~~Datenreifegrad-Terminologie~~ — ERLEDIGT
 4. **Ein Szenario durchspielen** — Graceful Degradation empirisch zeigen
 
 ### Should-Do
