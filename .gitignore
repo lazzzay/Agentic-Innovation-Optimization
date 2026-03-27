@@ -13,12 +13,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Local config
-.claude/
-.claude-flow/
-.mcp.json
-CLAUDE.md
-
 # Temporary
 *.tmp
 *.log
