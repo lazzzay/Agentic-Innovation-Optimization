@@ -8,12 +8,12 @@
 
 | Feld | Details |
 |------|---------|
-| **Arbeitstitel** | Agentic AI zur Optimierung von Innovationsprozessen in stagnierenden Startups |
+| **Arbeitstitel** | Agentic AI zur Optimierung von Innovationsprozessen in Startups mit ungenutztem Innovationspotenzial |
 | **Typ** | Projektarbeit (ggf. Paper) |
 | **Institution** | HTWG |
 | **Zeitrahmen** | ~1 Monat (Start: 26.03.2026) |
 | **Deadline** | ca. 26.04.2026 |
-| **Kernfrage** | Wie können agentische KI-Systeme bewährte Innovationsframeworks auf die Datenbasis stagnierrender Startups anwenden, um Stellhebel für Innovation zu identifizieren? |
+| **Kernfrage** | Wie können agentische KI-Systeme bewährte Innovationsframeworks auf die Datenbasis von Startups mit ungenutztem Innovationspotenzial anwenden, um Stellhebel für Innovation zu identifizieren? |
 
 ---
 
@@ -67,7 +67,7 @@
 
 | # | Problem | Status | Lösungsansatz | Ergebnis |
 |---|---------|--------|---------------|----------|
-| S1 | Framework-Auswahl: Welches Framework passt am besten? | OFFEN | Bewertungsmatrix mit Kriterien (Automatisierbarkeit, Praxisnähe, wissenschaftl. Fundierung) | - |
+| S1 | Framework-Auswahl: Welches Framework passt am besten? | DONE | Bewertungsmatrix mit Kriterien (Automatisierbarkeit, Praxisnähe, wissenschaftl. Fundierung) | Eigenes Hybrid-Framework (BIG Picture + Lean Startup + BMC + JTBD) → Lou's Framework V3 |
 | S2 | Datenverfügbarkeit: Reale Startup-Daten schwer zugänglich | OFFEN | Optionen: Synthetische Daten, öffentliche Daten, eigenes Szenario | - |
 
 ---
@@ -89,6 +89,11 @@
 | 27.03.2026 | Quality Check durchgeführt: Framework & Forschungsdesign erhalten 8,5/10 | Empfehlungen: Ressourcen-Realismus, Change-Management, Szenario-Pilotierung |
 | 27.03.2026 | LOUS_FRAMEWORK_V3 erstellt: Konsolidierung V1 + V2 | OFH-Architektur (V1) + vollständige L1-L7 (V2) + Dissens-als-Innovationssignal (neu) |
 | 27.03.2026 | Dissens-als-Innovationssignal als neues Konzept eingeführt | Fundamentaler Widerspruch zwischen Agents = potenzielle Innovationschance → an Mensch eskalieren |
+| 27.03.2026 | OFH (Orchestrated Feedback Hierarchy) als Agent-Governance beibehalten | Sprecher-Mechanismus aus V1 ist eleganter als hierarchischer Phase Manager (V2); in V3 konsolidiert |
+| 27.03.2026 | Claude (Anthropic) als LLM-Anbieter festgelegt | Bestes Reasoning für komplexe Innovationsanalysen; Agent SDK verfügbar |
+| 27.03.2026 | Agent SDK als technische Implementierungsbasis identifiziert | Ermöglicht deklarative Agent-Definition; native Multi-Agent-Koordination; OFH direkt abbildbar |
+| 27.03.2026 | V3 ist autoritative Version (Single Source of Truth) | V1 + V2 sind in V3 konsolidiert; alle weiteren Änderungen nur in V3 |
+| 27.03.2026 | Wording aktualisiert: "stagnierende Startups" → "Startups mit ungenutztem Innovationspotenzial" | Positiver Frame; beschreibt Chance statt Defizit; wissenschaftlich präziser |
 
 ---
 
@@ -102,6 +107,34 @@
 - **Framework-Recherche abgeschlossen**: 9 Frameworks analysiert und bewertet. Top-Kandidaten: BIG Picture + Lean Startup + BMC + JTBD als Hybrid. Detaillierte Analyse in `docs/FRAMEWORK_ANALYSE.md`.
 - **Forschungslücke identifiziert**: Kein publiziertes Framework bildet agentische KI-Fähigkeiten systematisch auf Innovationsprozess-Phasen ab. Unsere Arbeit wäre ein genuiner Beitrag.
 - **Docx-Titel des Users**: "Agentic AI für Sustainable Business Model Innovation" – Sustainability-Aspekt sollte im weiteren Verlauf berücksichtigt werden.
+
+### 27.03.2026 (Abend) – Agent SDK Erkenntnis & Housekeeping
+
+#### Fachliche Erkenntnisse
+
+**14. Agent SDK als technische Implementierungsebene**
+- Erkenntnis: Die 15 definierten Agents lassen sich über ein Agent SDK (z.B. Anthropic Claude Agent SDK) deklarativ implementieren
+- OFH-Sprecher-Mechanismus ist als Multi-Agent-Koordinations-Primitiv im SDK direkt abbildbar
+- Graceful Degradation wird durch dynamische Tool-Konfiguration zur Laufzeit realisiert
+- Jeder Agent = System-Prompt + Tool-Set + Constraints (keine Low-Level-Programmierung nötig)
+
+**15. AIP-as-a-Service als langfristige Vision**
+- Das Framework kann als Service-Plattform gedacht werden: Startup bringt Daten, Plattform bringt Agents + Governance
+- Datenreifegrad bestimmt automatisch, welche Agents aktiviert werden
+- Transformiert das wissenschaftliche Artefakt in ein skalierbares Produkt
+
+**16. Wording-Shift: "Stagnation" → "ungenutztes Innovationspotenzial"**
+- Positiver Frame statt Defizit-Perspektive
+- Wissenschaftlich präziser: Nicht alle Ziel-Startups "stagnieren" — manche wachsen, nutzen aber ihr Innovationspotenzial nicht aus
+- Besser für Akzeptanz bei Praxis-Partnern (kein Startup will als "stagnierend" gelabelt werden)
+
+#### Organisatorisches
+- GitHub-Repo aufgesetzt: lazzzay/Agentic-Innovation-Optimization (public)
+- TODO.md erstellt mit priorisierten Aufgaben
+- V3 als Single Source of Truth festgelegt (V1 + V2 sind konsolidiert)
+- Alle docs/ Dateien auf aktuellen Stand gebracht (Wording, Agent SDK, Entscheidungen)
+
+---
 
 ### 27.03.2026 – Framework V2 & Forschungsdesign Abschluss
 

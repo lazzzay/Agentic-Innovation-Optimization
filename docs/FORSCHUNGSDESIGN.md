@@ -15,7 +15,7 @@ Das identifizierte Forschungslücke lautet: **Es gibt kein publiziertes Framewor
 ### Option 1: Systemische Abbildung (Empfohlen)
 
 **Hauptfrage:**
-> Inwiefern können agentische KI-Systeme, auf Basis des LOU-Frameworks (Hybrid aus BIG Picture, Lean Startup, JTBD und BMC), den Innovationsprozess in stagnierenden Startups durch phasenübergreifende Orchestration optimieren?
+> Inwiefern können agentische KI-Systeme, auf Basis des LOU-Frameworks (Hybrid aus BIG Picture, Lean Startup, JTBD und BMC), den Innovationsprozess in Startups mit ungenutztem Innovationspotenzial durch phasenübergreifende Orchestration optimieren?
 
 **Unterfragen:**
 1. Wie lassen sich etablierte Innovationsframeworks (BIG Picture, JTBD, Lean Startup) in diskrete Agenten-Rollen und -Aufgaben dekonstruieren?
@@ -261,11 +261,11 @@ Das Projekt folgt dem Design-Science-Paradigma:
 ### **0. Titelblatt & Abstract** (2 Seiten)
 
 **0.1 Titelblatt** (1 S.)
-- Titel: "Agentische KI zur Optimierung von Innovationsprozessen in stagnierenden Startups: Ein Framework-Design und Mixed-Methods-Validierung"
+- Titel: "Agentische KI zur Optimierung von Innovationsprozessen in Startups mit ungenutztem Innovationspotenzial: Ein Framework-Design und Mixed-Methods-Validierung"
 - Autor, Institution (HTWG), Datum, Betreuer
 
 **0.2 Abstract** (0,5 S.)
-- Problem: Startups stagnieren oft in der Exploitation, Innovationsfähigkeit ist gering
+- Problem: Startups verharren oft in der Exploitation, ungenutztes Innovationspotenzial bleibt unerschlossen
 - Gap: Kein Framework bildet agentische KI systematisch auf Innovationsphasen ab
 - Lösung: LOU-Framework (Hybrid aus BIG Picture, Lean Startup, JTBD, BMC) + Agenten-Architektur
 - Methode: Mixed Methods (Literaturanalyse + Szenario-Simulation + Expertenvalidierung)
@@ -279,10 +279,10 @@ Das Projekt folgt dem Design-Science-Paradigma:
 ### **1. Einleitung** (4-5 Seiten)
 
 **1.1 Ausgangslage: Das Problem der Startup-Stagnation**
-- Definition: Was verstehen wir unter "stagnierenden Startups"? (Produkt-Markt-Fit erreicht, aber Wachstum plateaut)
+- Definition: Was verstehen wir unter "Startups mit ungenutztem Innovationspotenzial"? (Produkt-Markt-Fit erreicht, aber Wachstum plateaut, Innovationsfähigkeit nicht ausgeschöpft)
 - Empirisches Phänomen: Wie häufig ist Stagnation? (Statistiken aus Startup-Forschung)
 - Konsequenzen: Warum ist Innovationsfähigkeit für langfristigen Erfolg kritisch?
-- Beispielszenarien: 2-3 Fallbeispiele stagnierter Startups (fiktiv oder anonym real)
+- Beispielszenarien: 2-3 Fallbeispiele von Startups mit ungenutztem Innovationspotenzial (fiktiv oder anonym real)
 
 **1.2 Die Herausforderung: Bestehende Innovationsmethoden & ihre Grenzen**
 - Klassische Stage-Gate: Zu rigide, Ressourcen-intensiv
@@ -298,7 +298,7 @@ Das Projekt folgt dem Design-Science-Paradigma:
 - **Aber:** Keine systematische Abbildung von Agent-Capabilities auf konkrete Innovationsphasen
 
 **1.4 Forschungsfrage & Zielsetzung**
-- **Hauptfrage (Option 1):** "Inwiefern können agentische KI-Systeme, auf Basis des LOU-Frameworks, den Innovationsprozess in stagnierenden Startups durch phasenübergreifende Orchestration optimieren?"
+- **Hauptfrage (Option 1):** "Inwiefern können agentische KI-Systeme, auf Basis des LOU-Frameworks, den Innovationsprozess in Startups mit ungenutztem Innovationspotenzial durch phasenübergreifende Orchestration optimieren?"
 - **Unterfragen:** (3 Subfragen wie in Forschungsfrage-Sektion)
 - **Ziel:** Framework + empirische Validierung + Empfehlungen zur Implementierung
 
@@ -834,7 +834,7 @@ Das Projekt folgt dem Design-Science-Paradigma:
 **6.1 Forschungsfrage Revisit & Befunde**
 
 **6.1.1 Hauptfrage beantwortet?**
-> "Inwiefern können agentische KI-Systeme, auf Basis des LOU-Frameworks, den Innovationsprozess in stagnierenden Startups durch phasenübergreifende Orchestration optimieren?"
+> "Inwiefern können agentische KI-Systeme, auf Basis des LOU-Frameworks, den Innovationsprozess in Startups mit ungenutztem Innovationspotenzial durch phasenübergreifende Orchestration optimieren?"
 
 **Antwort (differenziert):**
 1. **Phasenübergreifende Orchestration ist möglich** – Agents können nacheinander arbeiten, Gates sind klare Handoff-Punkte
@@ -925,6 +925,14 @@ Das Projekt folgt dem Design-Science-Paradigma:
 3. **Ethik & Bias:** Inwiefern biased Agents die Innovationsrichtung (z.B. zu Inkrementell)?
 4. **User Experience & Trust:** Wie sollte die UX für Gründer aussehen, um Trust zu bauen? (Design-Perspektive)
 
+**6.5.3 Vision: AIP-as-a-Service**
+
+Langfristig lässt sich das AIP-Framework als **Service-Plattform** denken: Ein Startup verbindet seine bestehenden Datenquellen (CRM, Analytics, Support-Tickets) und erhält vorkonfigurierte, auf seinen Kontext zugeschnittene Agents. Die technische Basis dafür bildet ein Agent SDK (z.B. Anthropic Claude Agent SDK), das die 15 definierten Agents als deklarative Konfigurationen bereitstellt.
+
+**Kernidee:** Das Startup bringt Daten und Domänenwissen mit — die Plattform bringt die Agents, die OFH-Governance und die Innovationsprozess-Logik mit. Der Datenreifegrad (L1) bestimmt automatisch, welche Agents aktiviert und wie autonom sie arbeiten.
+
+Diese Vision transformiert das AIP-Framework von einem wissenschaftlichen Artefakt zu einem skalierbaren Produkt, das die in dieser Arbeit validierten Konzepte (Graceful Degradation, OFH, Dissens-als-Innovationssignal) operationalisiert.
+
 ---
 
 ### **7. Fazit & Ausblick** (2-3 Seiten)
@@ -971,7 +979,7 @@ Agentische KI-Systeme haben das Potenzial, Innovationsprozesse in Startups zu ac
 
 **7.4 Abschließende Gedanken**
 
-Für stagnierte Startups ist ein strukturiertes Innovationsprozess-Framework schon wertvoll. Wenn man es mit agentischer KI ausstattet, wird es zu einem echten Strategic Asset – schneller, konsistenter, weniger abhängig von einzelnen Personen.
+Für Startups mit ungenutztem Innovationspotenzial ist ein strukturiertes Innovationsprozess-Framework schon wertvoll. Wenn man es mit agentischer KI ausstattet, wird es zu einem echten Strategic Asset – schneller, konsistenter, weniger abhängig von einzelnen Personen.
 
 Dies ist der Anfang einer längerfristigen Forschung an der Schnittstelle von Innovation Management und AI Systems. Die nächsten Schritte sind Implementierung und Validierung mit echten Startups.
 

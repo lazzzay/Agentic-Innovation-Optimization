@@ -773,6 +773,29 @@ Agenten wandeln **unstrukturierte Daten** in strukturiertes Wissen um:
 3. **Access Controls**: Nur Orchestrator hat Zugriff auf alle Outputs; Gründer sieht Aggregationen
 4. **Data Retention**: Working Memory → gelöscht nach Zyklus; Episodic → 3 Zyklen; Semantic/Procedural → unbegrenzt
 
+### 10.5 Technische Implementierung: Agent SDK als Umsetzungsebene
+
+Die 15 im Framework definierten Agents (Kap. 2) lassen sich technisch über ein **Agent SDK** (z.B. Anthropic Claude Agent SDK) realisieren. Das SDK bildet die Brücke zwischen der konzeptionellen AIP-Architektur und einer lauffähigen Implementierung.
+
+**Mapping: AIP-Konzepte → Agent SDK**
+
+| AIP-Konzept | SDK-Realisierung |
+|-------------|-----------------|
+| **Orchestrator Agent** (L2) | SDK-Orchestrator mit Tool-Routing und Agent-Delegation |
+| **Spezialisierte Agents** (Phase A-E) | Individuelle Agent-Instanzen mit phasenspezifischen System-Prompts und Tool-Sets |
+| **OFH-Sprecher-Mechanismus** | SDK-Koordinationslogik: Agents diskutieren, Sprecher aggregiert, Orchestrator entscheidet |
+| **Dissens-als-Innovationssignal** | Divergenz-Detektion in Agent-Outputs → Eskalation an Human-in-the-Loop |
+| **Gate-Entscheidungen** | Strukturierte Outputs (JSON) mit Konfidenzwerten → Human-Approval-Workflow |
+| **Datenreifegrad-Adaption** (L1) | Dynamische Tool-Konfiguration: Stufe 1 = nur Gründer-Input-Tools; Stufe 4 = API-Connectors |
+| **Memory-Architektur** (L5) | SDK-persistente Memory (Working → Episodic → Semantic → Procedural) |
+| **Autonomie-Levels** (L3) | Konfigurierbare Human-Approval-Gates im SDK-Workflow |
+
+**Vorteile des SDK-Ansatzes:**
+- **Deklarative Agent-Definition**: Jeder der 15 Agents wird durch System-Prompt + Tool-Set + Constraints definiert — kein Low-Level-Code nötig
+- **Native OFH-Unterstützung**: Multi-Agent-Diskussion und Sprecher-Aggregation sind SDK-Primitiven
+- **Graceful Degradation**: Tool-Sets werden zur Laufzeit basierend auf Datenreifegrad konfiguriert
+- **Auditierbarkeit**: Alle Agent-Entscheidungen werden im SDK-Trace protokolliert (→ L6 Ethik-Compliance)
+
 ---
 
 ## 11. Schwachstellen-Adressierung

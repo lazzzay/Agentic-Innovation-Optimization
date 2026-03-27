@@ -76,6 +76,12 @@ Wenn das Framework sich selbst validieren kann, ist das der stärkste mögliche 
 
 **Dissens-Signal aufgetreten?**: JA – bei der Frage "Phase Manager (V2) vs. OFH (V1)". Lösung: Lou entschied für OFH. Der Dissens führte zur Entwicklung des Dissens-als-Innovationssignal-Konzepts. **Das Framework hat sich selbst verbessert.**
 
+**Agent SDK Erkenntnis (27.03. Abend):**
+- Während der Ideation-Phase wurde erkannt, dass ein Agent SDK (Anthropic Claude Agent SDK) die technische Implementierungsebene für die 15 Agents bereitstellt
+- OFH-Sprecher-Mechanismus ist als SDK-Primitiv direkt abbildbar → kein Custom-Code nötig
+- AIP-as-a-Service als langfristige Produktvision identifiziert
+- **Bedeutung**: Die Ideation hat nicht nur das Framework konzipiert, sondern auch den Weg zur Implementierung geöffnet
+
 **Gate C → D**: Top-Hypothese ausgewählt? **JA** – AIP V3 mit OFH + Dissens-Signal.
 
 ---
@@ -86,6 +92,7 @@ Wenn das Framework sich selbst validieren kann, ist das der stärkste mögliche 
 |-------------|-----------------|--------|
 | MVP definieren | ClientZero IST der MVP – Framework an uns selbst testen | IN ARBEIT |
 | Build | Framework V3 ist gebaut | DONE |
+| Tech-Stack festlegen | Claude (Anthropic) + Agent SDK als technische Basis; OFH als Governance | DONE |
 | Measure | Dokumentieren: Welche Outputs hat das Framework in jeder Phase produziert? | OFFEN |
 | Learn | Was hat funktioniert? Was nicht? Wo mussten wir abweichen? | OFFEN |
 | Iterieren | Framework V4 basierend auf ClientZero-Learnings? | OFFEN |
@@ -140,4 +147,4 @@ Wenn das Framework sich selbst validieren kann, ist das der stärkste mögliche 
 
 ---
 
-*Letzte Aktualisierung: 27.03.2026*
+*Letzte Aktualisierung: 27.03.2026 (Abend)*
