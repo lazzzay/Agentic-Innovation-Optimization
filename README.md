@@ -71,6 +71,14 @@ docs/
 
 This project is part of academic research at HTWG Konstanz, investigating the intersection of agentic AI systems and innovation management. Methodology: Mixed Methods with Design Science foundation (Hevner 2004).
 
+## Citing This Work
+
+If you use the AIP framework, its concepts (OFH, IT-Score, Ethical Friction, etc.), or build upon this work, please cite it:
+
+> lazzzay (2026). *Agentic Innovation Process (AIP) — A Framework for AI-Driven Innovation in Startups.* HTWG Konstanz. https://github.com/lazzzay/Agentic-Innovation-Optimization
+
+GitHub also provides a "Cite this repository" button via the `CITATION.cff` file.
+
 ## Contributing
 
 Feedback, ideas, and discussions are very welcome. Feel free to open an issue.
