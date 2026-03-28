@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this framework or build upon it, please cite it as below."
+title: "Agentic Innovation Process (AIP) — A Framework for AI-Driven Innovation in Startups"
+type: software
+authors:
+  - name: "lazzzay"
+    alias: "lazzzay"
+repository-code: "https://github.com/lazzzay/Agentic-Innovation-Optimization"
+abstract: >-
+  A novel framework that maps agentic AI capabilities to innovation process phases.
+  Introduces the Orchestrated Feedback Hierarchy (OFH), Dissent-as-Innovation-Signal,
+  Startup Genome & IT-Score, Ethical Friction, and a Two-Layer Knowledge Architecture.
+keywords:
+  - agentic-ai
+  - innovation
+  - startups
+  - multi-agent-systems
+  - framework
+license: MIT
+date-released: "2026-03-27"
