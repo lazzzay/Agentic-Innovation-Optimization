@@ -98,6 +98,7 @@
 | 27.03.2026 | L5 erweitert: Adversarial Learning + Second Brain (Obsidian) + Zwei-Schichten-Architektur | Devil's Advocate via Second Brain (token-sparend); Client-Vault (privat) + Pattern-Pool (anonymisiert) |
 | 27.03.2026 | L6 erweitert: Ethical Friction eingeführt | Proaktiver Groupthink-Schutz; nur bei ~100% Konsens; Denkanstoß, kein Veto |
 | 27.03.2026 | Phase 1 (IDEATION) abgeschlossen | Alle Aufgaben erledigt; Framework V3 vollständig; Abstract geschrieben |
+| 04.04.2026 | Prof-Feedback eingearbeitet: Fokussierung auf Kernbeitrag | Pyramidenstruktur: Adaptive Orchestrierung als Kern; OFH/Dissens (Steuerung) + Genome/IT-Score (Anpassung) + Second Brain/Ethical Friction (Lernen) als Ebenen |
 
 ---
 
@@ -124,6 +125,24 @@
 - Abstract geschrieben und in `docs/material/ABSTRACT.md` abgelegt
 - README aktualisiert mit vollständiger Framework-Übersicht
 - Bereit für Phase 2: EXECUTION
+
+---
+
+### 04.04.2026 – Prof-Feedback & Fokussierung
+
+#### Rückmeldung vom Betreuer
+- Kritik: Konzept zu breit, zu viele gleichwertige Ideen nebeneinander
+- Forderung: Klare Hierarchie mit einem Kernbeitrag, DSR-Framing stärker betonen
+- Keine inhaltliche Kritik an den Konzepten selbst
+
+#### Reaktion: 3-Ebenen-Pyramide
+- **Kern (Adaptive Orchestrierung)**: AIP passt sich an jedes Startup individuell an (Graceful Degradation + Genome-basierte Konfiguration)
+- **Ebene 1 (Steuerung)**: OFH + Dissens-als-Innovationssignal
+- **Ebene 2 (Anpassung)**: Startup Genome + IT-Score + Graceful Degradation
+- **Ebene 3 (Lernen)**: Second Brain + Adversarial Learning + Ethical Friction + Two-Layer Architecture
+- Forschungsfrage präzisiert auf adaptive Orchestrierung
+- Dokument für Prof erstellt: `docs/material/AIP_Kernbeitrag_Fokussierung.docx`
+- Logik-Check: Two-Layer Architecture als konzeptionell markiert (nur ClientZero in dieser Arbeit); "15 Agents" flexibilisiert
 
 ---
 
