@@ -1,17 +1,22 @@
 """Phase A: ERKENNEN — Where does the startup stand? Where is untapped potential?
 
-This phase runs three agents in parallel, then synthesizes via OFH:
-1. Audit Agent → BMC analysis
-2. Market Scanner → External intelligence
-3. Gap Detector → Innovation gaps (uses outputs of 1 & 2)
+This phase runs three agents (Audit + Market Scanner in parallel, then Gap Detector),
+then synthesizes via OFH:
+1. Audit Agent → BMC analysis          ⎤
+2. Market Scanner → External intelligence  ⎦ parallel (asyncio.gather)
+3. Gap Detector → Innovation gaps (uses outputs of 1 & 2) — sequential
 
 Then: OFH voting → Dissent detection → Ethical Friction check → Gate A→B
 """
 
 from __future__ import annotations
 
+import asyncio
 import json
+import logging
 from typing import Any
+
+from pydantic import BaseModel, Field
 
 from aip.agents.base import ModelTier, run_agent
 from aip.models.bmc import BusinessModelCanvas
@@ -21,10 +26,10 @@ from aip.models.startup import DataMaturityLevel
 from aip.ofh import detect_dissent, ethical_friction_check, spokesperson_synthesis
 from aip.state import AIPState
 
+logger = logging.getLogger(__name__)
+
 
 # -- Pydantic models for agent-specific structured outputs --
-
-from pydantic import BaseModel, Field
 
 
 class AuditOutput(BaseModel):
@@ -97,26 +102,30 @@ async def run_phase_a(state: AIPState) -> dict[str, Any]:
         ensure_ascii=False,
     )
 
-    # -- Step 1: Run Audit + Market Scanner in parallel --
+    # -- Step 1: Run Audit + Market Scanner in PARALLEL --
     # (Gap Detector needs their outputs, so it runs after)
+    logger.info("Phase A: Running Audit + Market Scanner in parallel...")
 
-    audit_result = await run_agent(
-        agent_name="audit",
-        tier=ModelTier.REASONING,
-        context=f"## Startup Data\n{startup_context}",
-        output_schema=AuditOutput,
-        additional_instructions=maturity_instruction,
-    )
-
-    market_result = await run_agent(
-        agent_name="market_scanner",
-        tier=ModelTier.REASONING,
-        context=f"## Startup Data\n{startup_context}",
-        output_schema=MarketScannerOutput,
-        additional_instructions=maturity_instruction,
+    audit_result, market_result = await asyncio.gather(
+        run_agent(
+            agent_name="audit",
+            tier=ModelTier.REASONING,
+            context=f"## Startup Data\n{startup_context}",
+            output_schema=AuditOutput,
+            additional_instructions=maturity_instruction,
+        ),
+        run_agent(
+            agent_name="market_scanner",
+            tier=ModelTier.REASONING,
+            context=f"## Startup Data\n{startup_context}",
+            output_schema=MarketScannerOutput,
+            additional_instructions=maturity_instruction,
+        ),
     )
 
     # -- Step 2: Gap Detector uses outputs from Audit + Market Scanner --
+    logger.info("Phase A: Running Gap Detector (depends on Audit + Market Scanner)...")
+
     gap_context = (
         f"## Startup Data\n{startup_context}\n\n"
         f"## Audit Agent Findings\n"
@@ -138,6 +147,8 @@ async def run_phase_a(state: AIPState) -> dict[str, Any]:
     )
 
     # -- Step 3: OFH — Dissent Detection --
+    logger.info("Phase A: Running OFH dissent detection...")
+
     agent_outputs = {
         "audit_agent": audit_result.model_dump(),
         "market_scanner": market_result.model_dump(),
@@ -147,9 +158,11 @@ async def run_phase_a(state: AIPState) -> dict[str, Any]:
     dissent_signals = await detect_dissent(agent_outputs, phase="A: ERKENNEN")
 
     # -- Step 4: Ethical Friction Check --
-    friction = await ethical_friction_check(agent_outputs, phase="A: ERKENNEN")
+    friction_questions = await ethical_friction_check(agent_outputs, phase="A: ERKENNEN")
 
     # -- Step 5: OFH Spokesperson → Gate Decision --
+    logger.info("Phase A: Spokesperson synthesis → Gate A→B...")
+
     gate_decision = await spokesperson_synthesis(
         agent_outputs=agent_outputs,
         dissent_signals=dissent_signals,
@@ -165,6 +178,7 @@ async def run_phase_a(state: AIPState) -> dict[str, Any]:
         competitor_insights=market_result.competitor_insights,
         innovation_gaps=gap_result.innovation_gaps,
         gate_decision=gate_decision,
+        ethical_friction_questions=friction_questions,
     )
 
     # Return partial state update

@@ -5,7 +5,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, computed_field
 
 
 class InnovationClass(str, Enum):
@@ -40,6 +40,7 @@ class Opportunity(BaseModel):
     satisfaction: float = Field(ge=0, le=10, description="How well is it currently done (0-10)")
     rationale: str = Field(description="Why this is an opportunity")
 
+    @computed_field
     @property
     def opportunity_score(self) -> float:
         """Ulwick formula: Importance + (Importance - Satisfaction)."""

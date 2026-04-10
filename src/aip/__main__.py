@@ -97,6 +97,16 @@ def display_phase_a_results(state: dict) -> None:
                 console.print(f"  [{d.divergence_score:.0%} divergence] {d.topic}")
                 console.print(f"    Innovation potential: {d.innovation_potential}")
 
+    # Ethical Friction (L6)
+    if phase_a.ethical_friction_questions:
+        console.print(
+            Panel(
+                phase_a.ethical_friction_questions,
+                title="[bold magenta]L6: Ethical Friction — Reflection Questions[/bold magenta]",
+                border_style="magenta",
+            )
+        )
+
     # Dissent signals from state
     all_dissent = state.get("dissent_signals", [])
     if all_dissent:
@@ -111,9 +121,13 @@ async def run_aip(scenario_path: str) -> None:
     profile = load_scenario(scenario_path)
     display_startup(profile)
 
-    # Validate API key
-    if not settings.anthropic_api_key:
-        console.print("[red]Error: AIP_ANTHROPIC_API_KEY not set. Create a .env file.[/red]")
+    # Validate API key for the configured provider
+    api_key = settings.get_api_key()
+    if not api_key and settings.provider.value != "ollama":
+        console.print(
+            f"[red]Error: No API key set for provider '{settings.provider.value}'.[/red]\n"
+            f"Set AIP_{settings.provider.value.upper()}_API_KEY in your .env file."
+        )
         sys.exit(1)
 
     # Build and run graph

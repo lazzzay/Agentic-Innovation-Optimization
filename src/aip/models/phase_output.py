@@ -28,6 +28,10 @@ class PhaseAOutput(BaseModel):
     gate_decision: GateDecision | None = Field(
         default=None, description="Gate A→B decision"
     )
+    ethical_friction_questions: str | None = Field(
+        default=None,
+        description="L6: Ethical Friction — reflection questions when consensus is too high",
+    )
     timestamp: datetime = Field(default_factory=datetime.now)
 
 

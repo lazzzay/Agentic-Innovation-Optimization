@@ -9,6 +9,7 @@ Each agent is a thin wrapper around a LangChain ChatModel call with:
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import TypeVar
 
@@ -17,10 +18,15 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel
 
 from aip.config import LLMProvider, ModelTier, settings
+from aip.utils import LLMOutputParseError, extract_json
+
+logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=BaseModel)
 
 PROMPTS_DIR = Path(__file__).parent / "prompts"
+
+MAX_RETRIES = 2
 
 
 def load_prompt(agent_name: str) -> str:
@@ -93,6 +99,9 @@ async def run_agent(
 ) -> T:
     """Run a single agent and return a typed, validated output.
 
+    Includes retry logic: if JSON parsing fails, the agent is called again
+    with an error hint (up to MAX_RETRIES attempts).
+
     Args:
         agent_name: Name matching a file in prompts/ (e.g., "audit" → prompts/audit.md)
         tier: Model tier for cost/quality routing
@@ -102,6 +111,9 @@ async def run_agent(
 
     Returns:
         Validated Pydantic model instance
+
+    Raises:
+        LLMOutputParseError: If all retry attempts fail
     """
     system_prompt = load_prompt(agent_name)
 
@@ -118,20 +130,37 @@ async def run_agent(
     )
 
     model = get_model(tier)
-    response = await model.ainvoke([
+    messages = [
         SystemMessage(content=system_prompt),
         HumanMessage(content=context),
-    ])
+    ]
 
-    # Parse and validate the response
-    raw_text = response.content
-    if isinstance(raw_text, list):
-        raw_text = raw_text[0]["text"] if raw_text else ""
+    last_error: Exception | None = None
 
-    # Extract JSON from potential markdown code blocks
-    text = str(raw_text).strip()
-    if text.startswith("```"):
-        lines = text.split("\n")
-        text = "\n".join(lines[1:-1])
+    for attempt in range(1, MAX_RETRIES + 1):
+        response = await model.ainvoke(messages)
 
-    return output_schema.model_validate_json(text)
+        raw_text = str(response.content)
+        if isinstance(response.content, list):
+            raw_text = response.content[0].get("text", "") if response.content else ""
+
+        try:
+            text = extract_json(raw_text)
+            return output_schema.model_validate_json(text)
+        except (json.JSONDecodeError, ValueError, LLMOutputParseError) as e:
+            last_error = e
+            logger.warning(
+                "Agent '%s' attempt %d/%d: JSON parse failed — %s",
+                agent_name, attempt, MAX_RETRIES, e,
+            )
+            if attempt < MAX_RETRIES:
+                # Add error feedback so the LLM can self-correct
+                messages.append(response)
+                messages.append(HumanMessage(
+                    content=(
+                        f"Your previous response was not valid JSON. Error: {e}\n"
+                        f"Please respond ONLY with a valid JSON object matching the schema."
+                    )
+                ))
+
+    raise LLMOutputParseError(raw_text, f"agent={agent_name}") from last_error

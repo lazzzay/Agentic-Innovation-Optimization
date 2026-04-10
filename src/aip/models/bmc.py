@@ -47,7 +47,7 @@ class BusinessModelCanvas(BaseModel):
     def all_weaknesses(self) -> list[str]:
         """Collect weaknesses across all blocks."""
         result = []
-        for field_name in self.model_fields:
+        for field_name in self.__class__.model_fields:
             block: BMCBlock = getattr(self, field_name)
             for w in block.weaknesses:
                 result.append(f"[{field_name}] {w}")

@@ -12,13 +12,17 @@ This is AIP's primary contribution to multi-agent governance.
 from __future__ import annotations
 
 import json
+import logging
 from typing import Any
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from aip.agents.base import get_model
-from aip.config import ModelTier
+from aip.config import ModelTier, settings
 from aip.models.innovation import DissensSignal, GateDecision
+from aip.utils import LLMOutputParseError, extract_json
+
+logger = logging.getLogger(__name__)
 
 
 OFH_SPOKESPERSON_PROMPT = """\
@@ -63,18 +67,23 @@ You must output valid JSON: a list of DissensSignal objects.
 async def detect_dissent(
     agent_outputs: dict[str, Any],
     phase: str,
+    dissent_threshold: float | None = None,
 ) -> list[DissensSignal]:
     """Analyze multiple agent outputs for fundamental disagreements.
 
     Args:
         agent_outputs: Mapping of agent_name → their output/analysis
         phase: Current phase identifier (for context)
+        dissent_threshold: Minimum divergence score to keep (from config if None)
 
     Returns:
         List of detected dissent signals (may be empty if agents agree)
     """
     if len(agent_outputs) < 2:
         return []
+
+    if dissent_threshold is None:
+        dissent_threshold = settings.dissent_threshold
 
     context = (
         f"Phase: {phase}\n\n"
@@ -101,13 +110,18 @@ async def detect_dissent(
         HumanMessage(content=context),
     ])
 
-    raw = str(response.content).strip()
-    if raw.startswith("```"):
-        lines = raw.split("\n")
-        raw = "\n".join(lines[1:-1])
+    try:
+        raw = str(response.content)
+        parsed = extract_json(raw)
+        items = json.loads(parsed)
+    except (json.JSONDecodeError, LLMOutputParseError) as e:
+        logger.warning("Dissent detection JSON parse failed: %s — returning empty", e)
+        return []
 
-    parsed = json.loads(raw)
-    return [DissensSignal.model_validate(item) for item in parsed]
+    signals = [DissensSignal.model_validate(item) for item in items]
+
+    # Filter by threshold from config
+    return [s for s in signals if s.divergence_score >= dissent_threshold]
 
 
 async def spokesperson_synthesis(
@@ -163,12 +177,20 @@ async def spokesperson_synthesis(
         HumanMessage(content=context),
     ])
 
-    raw = str(response.content).strip()
-    if raw.startswith("```"):
-        lines = raw.split("\n")
-        raw = "\n".join(lines[1:-1])
+    try:
+        raw = str(response.content)
+        text = extract_json(raw)
+        decision = GateDecision.model_validate_json(text)
+    except (json.JSONDecodeError, ValueError, LLMOutputParseError) as e:
+        logger.error("Spokesperson synthesis JSON parse failed: %s", e)
+        # Fallback: create a conservative "iterate" decision
+        decision = GateDecision(
+            gate=gate_name,
+            decision="iterate",
+            rationale=f"Automatic fallback — spokesperson output could not be parsed: {e}",
+            confidence=0.0,
+        )
 
-    decision = GateDecision.model_validate_json(raw)
     decision.dissent_signals = dissent_signals
     return decision
 
@@ -185,10 +207,10 @@ async def ethical_friction_check(
     Returns:
         Reflection questions string, or None if consensus isn't suspicious.
     """
-    dissent = await detect_dissent(agent_outputs, phase)
+    dissent = await detect_dissent(agent_outputs, phase, dissent_threshold=0.2)
 
     # If there's meaningful dissent, friction isn't needed
-    if any(d.divergence_score > 0.2 for d in dissent):
+    if dissent:
         return None
 
     # Full consensus → generate reflection questions
