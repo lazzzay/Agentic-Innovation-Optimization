@@ -1,0 +1,40 @@
+{
+  "name": "DataPulse Analytics",
+  "industry": "B2B SaaS — Marketing Analytics",
+  "stage": "series-a",
+  "employees": 28,
+  "description": "DataPulse provides marketing analytics dashboards for mid-market e-commerce companies. Founded in 2022, reached product-market fit in 2024 with 120 paying customers. Revenue has plateaued at €1.2M ARR for 8 months. The team is focused on maintaining existing features and responding to customer support tickets. No new product initiatives in 6 months.",
+  "genome": {
+    "structure": 3,
+    "culture": 2,
+    "founders": 4,
+    "technology": 3,
+    "market_image": 2,
+    "data_maturity": 3
+  },
+  "available_data": [
+    "crm",
+    "analytics",
+    "customer_support_tickets",
+    "financial_reports",
+    "product_usage_metrics"
+  ],
+  "current_challenges": [
+    "Revenue plateau at €1.2M ARR for 8 months",
+    "Churn rate increased from 3% to 5% monthly",
+    "Competitors launching AI-powered features",
+    "Team morale declining — no exciting projects",
+    "Two senior engineers left in the last quarter"
+  ],
+  "past_innovations": [
+    "Launched real-time dashboard feature (2023) — drove initial growth",
+    "Attempted enterprise tier (2024) — failed due to missing compliance features",
+    "Considered expanding to social media analytics — shelved due to resource constraints"
+  ],
+  "strategic_goals": [
+    "Reach €2M ARR within 12 months",
+    "Reduce churn to below 3%",
+    "Launch at least one AI-powered feature",
+    "Expand into adjacent market segment"
+  ]
+}

@@ -1,5 +1,8 @@
 # Dependencies
 node_modules/
+.venv/
+__pycache__/
+*.egg-info/
 
 # Environment
 .env
@@ -16,3 +19,13 @@ Thumbs.db
 # Temporary
 *.tmp
 *.log
+
+# AIP Runtime
+checkpoints/
+outputs/
+
+# Claude Code / Flow (nicht committen)
+.claude/
+.claude-flow/
+.mcp.json
+CLAUDE.md
