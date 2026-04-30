@@ -52,7 +52,8 @@ Startups mit ungenutztem Innovationspotenzial stehen vor einem Dilemma: Etablier
 | Tabelle 7 | Graceful Degradation nach Datenreifegrad | 4.4 |
 | Tabelle 8 | IT-Score-Gewichtung mit Rationale | 4.5 |
 | Tabelle 9 | Technologie-Stack des Prototyps | 5.1 |
-| Tabelle 10 | Hypothetisches Startup-Profil zur Architektur-Illustration | 5.4 |
+| Tabelle 10 | Eingabeprofil DataPulse Analytics für den ausgeführten Validierungslauf | 5.4 |
+| Tabelle 10a | Vom Gap Detector Agent identifizierte Innovationslücken (Phase A) | 5.4 |
 | Tabelle 11 | Startup Genome des Forschungsprojekts (ClientZero) | 5.5.2 |
 | Tabelle 12 | ClientZero — Phasenanwendung mit typisierten Outputs | 5.5.3 |
 | Tabelle 13 | ClientZero — Quantitative Metriken | 5.5.5 |
@@ -183,9 +184,9 @@ Die Validierung folgt einem triangulierenden Ansatz, der mehrere qualitative Met
 - **Systematische Literaturanalyse:** 6 Innovationsframeworks komparativ bewertet, >80 Quellen zu Agentic AI gesichtet
 - **Framework-Synthese:** Komparative Analyse zur Identifikation komplementärer Stärken
 - **ClientZero-Meta-Validierung:** Anwendung des Frameworks auf das Forschungsprojekt selbst als ersten Testcase (vgl. Kap. 3.3, Kap. 5.5) — die zentrale Validierungssäule dieser Arbeit
-- **Prototypische Instanziierung:** Lauffähiger Prototyp der Phase A mit typisierten Artefakten (Pydantic-Modelle), der die technische Realisierbarkeit der konzeptuellen Architektur belegt
+- **Prototypische Instanziierung:** Lauffähiger Prototyp der Phase A mit typisierten Artefakten (Pydantic-Modelle), der die technische Realisierbarkeit der konzeptuellen Architektur belegt. Ein ausgeführter Demonstrations-Lauf gegen das DataPulse-Szenario (Kap. 5.4) liefert reproduzierbare Outputs gegen ein produktives LLM-Backend.
 
-Ergänzend sichern 47 automatisierte Tests die technische Korrektheit der Implementierung ab: 37 Unit-Tests für die Pydantic-Domänenmodelle, die Konfiguration und die JSON-Parsing-Logik sowie 10 Tests für die OFH-Kernlogik (Dissent Detection, Spokesperson Synthesis, Ethical Friction). Letztere nutzen Mocks für die LLM-Schicht und verifizieren u. a. das Threshold-Filtering, die Fallback-Verhalten bei fehlerhaftem JSON-Output (DR3), die Propagation von Dissens-Signalen in die Gate-Decision sowie das Auslösen der Ethical Friction bei vollständigem Konsens. Die Tests validieren nicht das Framework selbst, sondern die Implementierungsqualität und das Verhalten der Kernmechanismen. Ein hypothetisches Startup-Profil (DataPulse Analytics, Kap. 5.4) wird ausschließlich zur Architektur-Illustration herangezogen und ist explizit nicht Teil der Triangulation — die wissenschaftliche Aussagekraft der Validierung beruht auf der ClientZero-Anwendung, nicht auf einem hypothetischen Szenario.
+Ergänzend sichern 47 automatisierte Tests die technische Korrektheit der Implementierung ab: 37 Unit-Tests für die Pydantic-Domänenmodelle, die Konfiguration und die JSON-Parsing-Logik sowie 10 Tests für die OFH-Kernlogik (Dissent Detection, Spokesperson Synthesis, Ethical Friction). Letztere nutzen Mocks für die LLM-Schicht und verifizieren u. a. das Threshold-Filtering, die Fallback-Verhalten bei fehlerhaftem JSON-Output (DR3), die Propagation von Dissens-Signalen in die Gate-Decision sowie das Auslösen der Ethical Friction bei vollständigem Konsens. Die Tests validieren nicht das Framework selbst, sondern die Implementierungsqualität und das Verhalten der Kernmechanismen. Die wissenschaftliche Aussagekraft der Validierung beruht primär auf der ClientZero-Anwendung als Selbstanwendungs-Existenzbeweis; der DataPulse-Lauf ergänzt diese durch die technische Demonstration des Frameworks an einem nicht-eigenen, strukturierten Profil.
 
 Im Sinne von Hevner et al. (2004, Guideline 3) ist diese Form deskriptiver Evaluation für ein nascent Design-Artefakt angemessen; die experimentelle Evaluation an externen Startups bleibt als notwendiger nächster Schritt expliziter Bestandteil des Ausblicks (Kap. 7.2).
 
@@ -446,11 +447,11 @@ Sämtliche Innovationsartefakte sind als typisierte Pydantic-Modelle implementie
 
 Die durchgängige Typisierung stellt sicher, dass Agent-Outputs validiert und strukturiert vorliegen — im Gegensatz zu freien Textausgaben, die manuelle Interpretation erfordern würden.
 
-### 5.4 Illustrativer Architektur-Walkthrough: DataPulse Analytics
+### 5.4 Ausgeführter Validierungslauf: DataPulse Analytics
 
-Zur Veranschaulichung der Architektur und der Zusammenarbeit zwischen Agenten und OFH wird im Folgenden ein hypothetisches Startup-Szenario beschrieben. Es handelt sich ausdrücklich **nicht** um einen ausgeführten LLM-Lauf, sondern um eine architekturzentrierte Demonstration: Welche typisierten Artefakte würde der Prototyp produzieren, wie liefen die Agent-Outputs durch die OFH, und wo griffen Dissens-Detektion und Ethical Friction? Die wissenschaftliche Validierung erfolgt in Kap. 5.5 über die Meta-Anwendung des Frameworks auf das Forschungsprojekt selbst (ClientZero); das hier vorgestellte Szenario dient ausschließlich der Architektur-Illustration.
+Ergänzend zur ClientZero-Meta-Validierung (Kap. 5.5) wurde der Prototyp mit einem fiktiven, aber strukturierten Startup-Szenario gegen ein produktives Anthropic-Sonnet-4.6-Backend ausgeführt. Dies demonstriert die technische Funktionsfähigkeit des Frameworks an einem nicht-eigenen Profil und liefert reproduzierbare Outputs (`outputs/datapulse_analytics/phase_a_20260430_225037.json`). Der Lauf bleibt explizit ein *Single-Case Demonstration Run* und kein empirischer Wirksamkeitsnachweis — er erfüllt die DSR-Anforderung der prototypischen Demonstration (Hevner et al., 2004, Guideline 3) und dient als zweite Säule neben der Selbstanwendung. Externe Wirksamkeitsstudien bleiben Folgearbeit (Kap. 7.2).
 
-Das Profil:
+Das Eingabeprofil:
 
 | Feld | Wert |
 |------|------|
@@ -463,42 +464,34 @@ Das Profil:
 | Schwächste Dimension | Kultur (2/5) |
 | Datenreifegrad | Level 3 (Strukturiert) |
 
-*Tabelle 10: Hypothetisches Startup-Profil zur Architektur-Illustration (kein ausgeführter Lauf)*
+*Tabelle 10: Eingabeprofil DataPulse Analytics für den ausgeführten Validierungslauf*
 
-Das Profil bildet einen typischen Fall ab: Ein SaaS-Startup mit solider Technologie aber schwacher Innovationskultur, das nach initialem Wachstum auf einem Umsatzplateau stagniert. Der Datenreifegrad 3 würde quantitative Analysen durch die Agenten ermöglichen.
+Das Profil bildet einen typischen Fall ab: ein SaaS-Startup mit solider Technologie aber schwacher Innovationskultur, das nach initialem Wachstum auf einem Umsatzplateau stagniert. Der Datenreifegrad 3 ermöglichte quantitative Analysen durch die Agenten.
 
-**Architekturskizze — wie die Agenten in Phase A zusammenwirken würden:**
+**Konkrete Outputs des Laufs.** Der Audit Agent erstellte einen vollständigen Ist-BMC über alle neun Blöcke und diagnostizierte eine *Exploitation/Exploration-Ratio von ~95/5*: keine neuen Produktinitiativen in sechs Monaten, gescheiterter Enterprise-Tier ohne Ersatz, Senior-Engineering-Abgänge. Der Market Scanner Agent identifizierte fünf strukturelle Markttrends, darunter den Shift von deskriptiver zu *prescriptive Analytics* (Konkurrenten Northbeam, Triple Whale, Rockerbox), den Cookie-Deprecation-induzierten Drang nach First-Party-Data-Plattformen sowie steigenden Konsolidierungsdruck durch Salesforce/HubSpot-Akquisitionen. Der Gap Detector Agent synthetisierte aus beiden Outputs **sieben priorisierte Innovationslücken**:
 
-Der folgende Auszug zeigt anhand handgeführter Beispiel-Outputs, wie die drei Agenten im Prototyp zusammenwirken. Die Outputs sind nicht aus einem LLM-Lauf, sondern entlang der Pydantic-Schemata des Prototyps konstruiert, um Form und Typisierung der erwarteten Artefakte zu zeigen. Der Audit Agent analysiert den BMC und identifiziert eine Schwäche im Bereich *Customer Relationships*:
+| # | Innovationslücke (gekürzt) | Severity | BMC-Block |
+|---|---------------------------|:--------:|-----------|
+| 1 | AI Feature Void in a Market Demanding Prescriptive Analytics | critical | value_propositions |
+| 2 | Churn Crisis Masking as a Product Problem — No Customer Success Infrastructure | critical | customer_relationships |
+| 3 | First-Party Data Positioning Gap — Structural Market Shift Unaddressed | high | value_propositions |
+| 4 | Single Revenue Stream — NRR Structurally Below 100% | high | revenue_streams |
+| 5 | Exploration Capacity Collapse — Innovation Engine Has Stalled | high | key_activities |
+| 6 | Vertical Specialization Gap — Generic Positioning in a Fragmenting Market | medium | customer_segments |
+| 7 | Partner and Channel Ecosystem Absent | medium | key_partners |
 
-```
-Audit Agent → BMCBlock(customer_relationships):
-  entries: ["Self-Service Dashboard", "Quarterly Reviews"]
-  weaknesses: ["Kein proaktives Engagement",
-               "Churn-Prevention nur reaktiv"]
-  opportunities: ["AI-gestütztes Success Monitoring"]
-```
+*Tabelle 10a: Vom Gap Detector Agent identifizierte Innovationslücken (Phase A, ausgeführter Lauf 2026-04-30)*
 
-Der Market Scanner Agent identifiziert parallel einen Markttrend:
+**OFH-Verhalten.** Die Dissent Detection identifizierte vier fundamentale Widersprüche zwischen den Agenten — ein Indikator für ein konzeptionell reichhaltiges Problem, in dem die Agenten unterschiedliche Diagnosen aus denselben Daten ableiteten. Die vier `DissensSignal`-Outputs lauteten (Divergence-Score in Klammern):
 
-```
-Market Scanner Agent → Trends:
-  "Composable Analytics": Wettbewerber bieten modulare
-  Analytics-Pipelines, DataPulse ist monolithisch.
-```
+1. **Root cause of churn acceleration** (0,75) — Audit Agent vs. Market Scanner: Customer-Success-Versagen vs. Produktlücke. Der Critique-Agent extrahierte ein „perceived value bridge"-Konstrukt als Hybrid-Innovation: leichtgewichtige AI-Insights, proaktiv durch eine CS-Schicht surfacet, die Zeit für tiefere Produktentwicklung schaffen.
+2. **GDPR/First-Party-Data Posture: latenter Differentiator vs. unbuilt capability** (0,80) — Audit Agent vs. Market Scanner. Innovationspotenzial: ein zweiwöchiger technischer Spike, der entweder ein Zero-Cost-Repositioning oder einen klar gescopten Build-Roadmap freischaltet.
+3. **Priority Sequencing AI vs. Churn Reduction** (0,70) — Audit Agent vs. Gap Detector. Innovationspotenzial: ein „retention-led product development"-Modell, das CS-Gespräche mit gefährdeten Accounts in Roadmap-Co-Design verwandelt.
+4. **Viability des Enterprise-Tiers** (0,65) — Audit Agent vs. Gap Detector. Innovationspotenzial: ein „compliance-first mid-market"-Tier zwischen gescheitertem Enterprise und generischem Mid-Market.
 
-Der Gap Detector Agent synthetisiert beide Ergebnisse zu einer typisierten `InnovationGap`:
+**Gate-Entscheidung.** Der Spokesperson Agent fasste die vier Dissens-Signale **nicht** zu einer Mehrheitsmeinung zusammen, sondern propagierte sie explizit in die `GateDecision` (`gate: "A→B"`, `decision: "go"`, `confidence: 0.87`). Die Begründung des Gates dokumentierte die Dissens-Signale als „innovation-grade tensions, die als strukturierte Hypothesen in Phase B getragen werden müssen — nicht aufgelöst werden vor der Exploration". Damit ist der zentrale Mechanismus der Arbeit — Dissens-als-Innovationssignal — am ausgeführten Lauf empirisch sichtbar geworden.
 
-```
-Gap Detector Agent → InnovationGap:
-  title: "Monolithische Architektur vs. Composable-Trend"
-  severity: "high"
-  bmc_block: "value_propositions"
-  evidence: "Markttrend zu composable, aber DataPulse
-             bietet nur monolithisches Dashboard"
-```
-
-In dieser hypothetischen Konstellation würde die Dissent Detection keinen fundamentalen Widerspruch identifizieren — alle Agenten sähen die monolithische Architektur als Problem. Das Ethical-Friction-Modul würde daraufhin eine Reflexionsfrage generieren, etwa: *„Könnte die monolithische Architektur auch ein Vorteil sein (Simplicity, Integration)? Welche Kundensegmente bevorzugen eine All-in-One-Lösung?"* Damit ist die strukturelle Funktionsweise des Konsens-Warnsignals sichtbar, ohne dass es eines ausgeführten LLM-Laufs bedarf.
+Da reichhaltiger Dissens vorhanden war, blieb die Ethical Friction inaktiv (kein verdächtiger Konsens). Der vollständige Lauf-Output mit allen typisierten Pydantic-Artefakten liegt im Repository unter `outputs/datapulse_analytics/phase_a_20260430_225037.json`.
 
 ### 5.5 ClientZero-Validierung
 
@@ -629,7 +622,7 @@ Die OFH demonstriert, dass ein demokratischer Governance-Mechanismus mit Spokesp
 
 **Unterfrage 3** — *Inwiefern unterscheidet sich die Effektivität der agentischen Unterstützung je nach Datenreifegrad?*
 
-Das Graceful-Degradation-Prinzip (L1) ermöglicht dem Framework, auf jeder Datenlage sinnvolle Outputs zu produzieren — von strukturierten Fragen (Level 1) bis zu statistischen Analysen (Level 4). Die ClientZero-Anwendung belegt dies konkret: Das Projekt arbeitete auf Datenreifegrad 2 (fragmentiert — Literatur und unstrukturierte Arbeitsdokumente als Inputdaten) und produzierte dennoch verwertbare Ergebnisse in Form von Hypothesen mit expliziter Konfidenzeinschätzung. Der illustrative DataPulse-Walkthrough (Kap. 5.4, Level 3) demonstriert konzeptionell, wie sich der Output-Typ bei höherer Datenreife in Richtung quantitativer Metriken verschieben würde — eine empirische Bestätigung dieser Verschiebung steht aus und ist Bestandteil der Folgeforschung (Kap. 7.2).
+Das Graceful-Degradation-Prinzip (L1) ermöglicht dem Framework, auf jeder Datenlage sinnvolle Outputs zu produzieren — von strukturierten Fragen (Level 1) bis zu statistischen Analysen (Level 4). Die ClientZero-Anwendung belegt dies konkret: Das Projekt arbeitete auf Datenreifegrad 2 (fragmentiert — Literatur und unstrukturierte Arbeitsdokumente als Inputdaten) und produzierte dennoch verwertbare Ergebnisse in Form von Hypothesen mit expliziter Konfidenzeinschätzung. Der ausgeführte DataPulse-Lauf (Kap. 5.4, Level 3) bestätigt diese Verschiebung empirisch: Bei strukturierten Daten produzierten die Agenten quantifizierte Outputs (Exploitation/Exploration-Ratio ~95/5, sieben priorisierte Innovationslücken mit Severity-Klassifikation, vier Dissens-Signale mit Divergence-Scores zwischen 0,65 und 0,80). Eine darüber hinausgehende empirische Wirksamkeitsbewertung gegenüber realen Anwendern bleibt Bestandteil der Folgeforschung (Kap. 7.2).
 
 Die Antwort auf die Unterfrage ist somit differenziert: Die *Art* der Unterstützung ändert sich qualitativ mit dem Datenreifegrad (von Fragen zu Metriken), während die *Nützlichkeit* auf jedem Level erhalten bleibt. Dies bestätigt die Satisficing-Hypothese (Simon, 1955): Auch unter Unsicherheit können hinreichend gute Ergebnisse erzielt werden.
 
@@ -668,7 +661,7 @@ Die Arbeit unterliegt folgenden Limitationen:
 
 2. **ClientZero-Zirkularität:** Die Meta-Validierung unterliegt einer inhärenten Zirkularität — das Artefakt evaluiert sich selbst. Obwohl diese Limitation durch ergänzende Validierungsformen gemildert wird (vgl. Kap. 3.3), kann ClientZero eine unabhängige externe Evaluation nicht ersetzen. Der Befund, dass das Framework seinen eigenen Entwicklungsprozess verbessert hat, ist zwar ein positives Signal für interne Konsistenz, aber kein Beweis für externe Validität.
 
-3. **Keine externe Anwendung:** Die Validierung beschränkt sich auf die ClientZero-Meta-Anwendung und einen illustrativen Architektur-Walkthrough. Reale Startup-Anwendungen mit externen Gründern stehen aus. Im Sinne von Hevner et al. (2004, Guideline 3) ist die deskriptive Evaluation für ein nascent Design-Artefakt angemessen; die experimentelle Evaluation bleibt als notwendiger nächster Schritt der Folgeforschung (Kap. 7.2).
+3. **Keine externe Anwendung mit echten Stakeholdern:** Die Validierung kombiniert die ClientZero-Meta-Anwendung mit einem ausgeführten Demonstrations-Lauf gegen ein fiktives Szenario. Eine kontrollierte Anwendung mit realen Gründern, mit Pre/Post-Messung von Innovationsergebnissen, steht aus. Im Sinne von Hevner et al. (2004, Guideline 3) ist die deskriptive Evaluation für ein nascent Design-Artefakt angemessen; die experimentelle Evaluation bleibt als notwendiger nächster Schritt der Folgeforschung (Kap. 7.2).
 
 4. **LLM-Abhängigkeit:** Die Qualität der Agent-Outputs hängt direkt von der Qualität des verwendeten LLMs ab. Obwohl die Implementierung provider-agnostisch ist (DR6), wurden die Modelle nicht systematisch verglichen. Unterschiedliche LLMs könnten zu signifikant unterschiedlichen Dissens-Signalen und Gate-Empfehlungen führen.
 

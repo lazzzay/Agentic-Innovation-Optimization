@@ -23,7 +23,10 @@ Thumbs.db
 
 # AIP Runtime
 checkpoints/
-outputs/
+outputs/*
+!outputs/datapulse_analytics/
+outputs/datapulse_analytics/*
+!outputs/datapulse_analytics/*.json
 
 # Build-Artefakte (PDF, Mermaid-Renderings)
 build/

@@ -110,6 +110,8 @@
 | 30.04.2026 | Kapitel-Review Inkonsistenzen behoben | IT-Score-Gewichte-Bug (Kap. 5.5.2) korrigiert auf 10/20/15/20/10/25 % gemäß Code → IT-Score = 3,40/5; DataPulse-Reframe-Konsistenz in Kap. 3.3, 6.1, 6.5 hergestellt; Kap. 7.1 Klassifikationsfehler (4 Frameworks + 1 Linse statt 5) korrigiert |
 | 30.04.2026 | Abbildungen auf Mermaid umgestellt | Abb. 1 (OFH-Architektur, Kap. 4.3) und Abb. 2 (AIP-Phasenmodell, Kap. 4.6) als Mermaid-Diagramme statt ASCII; rendert in GitHub/Pandoc/modernen PDF-Toolchains |
 | 30.04.2026 | Verzeichnisse + BUILD-Anleitung ergänzt | Abbildungsverzeichnis, Tabellenverzeichnis, Abkürzungsverzeichnis nach Abstract; `docs/BUILD.md` mit drei Pandoc-PDF-Export-Varianten (simpel / mit Mermaid / vollständig mit BibTeX) |
+| 30.04.2026 | Erster echter Live-Run Phase A (DataPulse-Szenario) | Anthropic Sonnet 4.6, 7 Innovation Gaps (2 critical, 3 high, 2 medium), Gate A→B = GO @ 87 % Confidence, vier echte Dissens-Signale (Divergence 0,65–0,80) inkl. „perceived value bridge" und „compliance-first mid-market" als emergente Innovation-Hybrids. Output committed: `outputs/datapulse_analytics/phase_a_20260430_225037.json` |
+| 30.04.2026 | Kap. 5.4 von „illustrativ" auf ausgeführten Lauf upgegradet | Konkrete Outputs aus dem Run zitiert (Tabelle 10a Innovationslücken, alle vier Dissens-Signale rekonstruiert); Kap. 3.2, 6.1, 6.5 entsprechend konsistent gemacht |
 
 ---
 
