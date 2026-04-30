@@ -45,6 +45,7 @@ Startups mit ungenutztem Innovationspotenzial stehen vor einem Dilemma: Etablier
 |-----|-------|---------|
 | Tabelle 1 | Bewertungsmatrix ausgewählter Innovationsframeworks | 2.2 |
 | Tabelle 2 | DSRM-Mapping nach Peffers et al. (2007) | 3.1 |
+| Tabelle 2a | Triangulationsmatrix — Methoden × evaluative Kernbehauptungen | 3.2 |
 | Tabelle 3 | Design-Anforderungen mit theoretischer Fundierung | 3.4 |
 | Tabelle 4 | AIP-Architektur — Phasen und Layers mit DR-Zuordnung | 4.1 |
 | Tabelle 5 | Design-Rationale — Framework-Rollen mit Kernel Theories | 4.2 |
@@ -175,7 +176,7 @@ Die Arbeit folgt dem Design-Science-Paradigma nach Hevner et al. (2004) und impl
 
 *Tabelle 2: DSRM-Mapping*
 
-Das primäre Artefakt ist das AIP-Framework, das nach Hevner et al. (2004) drei Artefakttypen vereint: ein **Modell** (5-Phasen-Architektur mit 7 Layers), eine **Methode** (OFH-Prozess) und eine **Instanziierung** (lauffähiger Prototyp). Im Sinne der Knowledge Contribution Matrix nach Gregor und Hevner (2013) handelt es sich um eine *Exaptation*: Reife Lösungsartefakte (etablierte Innovationsframeworks, bekannte MAS-Patterns) werden auf einen neuartigen Problemraum (agentische KI-Orchestrierung von Innovationsprozessen) angewendet. Gregor und Hevner (2013) betonen, dass Exaptation-Beiträge häufig unterschätzt werden, obwohl sie hohen praktischen Impact haben.
+Das primäre Artefakt ist das AIP-Framework, das nach Hevner et al. (2004) drei Artefakttypen vereint: ein **Modell** (5-Phasen-Architektur mit 7 Layers), eine **Methode** (OFH-Prozess) und eine **Instanziierung** (lauffähiger Prototyp). In der Knowledge Contribution Matrix nach Gregor und Hevner (2013) positioniert sich der Beitrag zweistufig: **Auf Framework-Ebene** ist es eine *Exaptation* — etablierte Innovationsframeworks (BIG Picture, Lean Startup, JTBD, BMC) werden in den neuen Problemraum agentischer KI-Orchestrierung übertragen. **Auf Konstrukt-Ebene** sind die fünf eigenständigen Bausteine — OFH, Dissens-als-Innovationssignal, Ethical Friction, IT-Score mit Startup Genome, ClientZero — *Improvement*-Beiträge: neuartige Lösungsmechanismen für ein bekanntes Problem (Multi-Agent-Governance unter Innovationsanforderungen). Diese Doppelpositionierung ist methodisch konsistent mit der Knowledge Contribution Matrix, in der ein Forschungsartefakt durchaus an unterschiedlichen Ebenen unterschiedliche Quadranten besetzen kann (vgl. Gregor & Hevner, 2013, S. 345). Gregor und Hevner (2013) betonen zudem, dass Exaptation-Beiträge häufig unterschätzt werden, obwohl sie hohen praktischen Impact haben — die hier vorgelegte Kombination aus Übertragung etablierter Bausteine und neuartigen Verbindungs-Konstrukten adressiert genau diesen Vorbehalt.
 
 ### 3.2 Methodische Triangulation
 
@@ -185,6 +186,19 @@ Die Validierung folgt einem triangulierenden Ansatz, der mehrere qualitative Met
 - **Framework-Synthese:** Komparative Analyse zur Identifikation komplementärer Stärken
 - **ClientZero-Meta-Validierung:** Anwendung des Frameworks auf das Forschungsprojekt selbst als ersten Testcase (vgl. Kap. 3.3, Kap. 5.5) — die zentrale Validierungssäule dieser Arbeit
 - **Prototypische Instanziierung:** Lauffähiger Prototyp der Phase A mit typisierten Artefakten (Pydantic-Modelle), der die technische Realisierbarkeit der konzeptuellen Architektur belegt. Ein ausgeführter Demonstrations-Lauf gegen das DataPulse-Szenario (Kap. 5.4) liefert reproduzierbare Outputs gegen ein produktives LLM-Backend.
+
+Die Triangulation ist nicht additiv (Methodensammlung), sondern konvergent angelegt: Jede der drei evaluativen Kernbehauptungen wird durch genau eine primäre und mehrere unterstützende Methoden gestützt. Tabelle 2a macht diese Konvergenzlogik explizit:
+
+| Methode | Forschungslücke existiert | Internes Konsistenz-Beweis | Technische Realisierbarkeit |
+|---------|:---:|:---:|:---:|
+| Systematische Literaturanalyse | ✦ primär | – | – |
+| Framework-Synthese (komparativ) | ◦ unterstützend | ◦ unterstützend (Komplementarität) | – |
+| ClientZero-Meta-Validierung | – | ✦ primär | ◦ unterstützend (Selbstanwendbarkeit) |
+| Prototypische Instanziierung mit Demo-Lauf | – | ◦ unterstützend (gepinnte OFH-Logik) | ✦ primär |
+
+*Tabelle 2a: Triangulationsmatrix — Methoden × evaluative Kernbehauptungen (Konvergenzdesign)*
+
+Die Matrix zeigt, dass jede Behauptung von mindestens einer primären und einer unterstützenden Quelle getragen wird, ohne dass eine einzelne Methode für mehrere primäre Behauptungen verantwortlich ist. Dies entspricht dem Triangulationsverständnis nach Denzin (1978), bei dem mehrere Methoden auf dasselbe Erkenntnisobjekt konvergieren. Eine empirische Wirksamkeits-Behauptung (im Sinne messbarer Innovationsergebnisse an externen Startups) ist explizit *nicht* Bestandteil dieser Triangulation — sie bleibt Folgearbeit (Kap. 7.2).
 
 Ergänzend sichern 47 automatisierte Tests die technische Korrektheit der Implementierung ab: 37 Unit-Tests für die Pydantic-Domänenmodelle, die Konfiguration und die JSON-Parsing-Logik sowie 10 Tests für die OFH-Kernlogik (Dissent Detection, Spokesperson Synthesis, Ethical Friction). Letztere nutzen Mocks für die LLM-Schicht und verifizieren u. a. das Threshold-Filtering, die Fallback-Verhalten bei fehlerhaftem JSON-Output (DR3), die Propagation von Dissens-Signalen in die Gate-Decision sowie das Auslösen der Ethical Friction bei vollständigem Konsens. Die Tests validieren nicht das Framework selbst, sondern die Implementierungsqualität und das Verhalten der Kernmechanismen. Die wissenschaftliche Aussagekraft der Validierung beruht primär auf der ClientZero-Anwendung als Selbstanwendungs-Existenzbeweis; der DataPulse-Lauf ergänzt diese durch die technische Demonstration des Frameworks an einem nicht-eigenen, strukturierten Profil.
 
@@ -482,6 +496,8 @@ Das Profil bildet einen typischen Fall ab: ein SaaS-Startup mit solider Technolo
 
 *Tabelle 10a: Vom Gap Detector Agent identifizierte Innovationslücken (Phase A, ausgeführter Lauf 2026-04-30)*
 
+Die Severity-Rubrik (low/medium/high/critical) folgt der im Domänenmodell `InnovationGap` dokumentierten Vier-Stufen-Definition: *low* = keine unmittelbare Auswirkung, *medium* = messbarer Effekt innerhalb von 6–12 Monaten, *high* = materielles Risiko für einen Kern-BMC-Block innerhalb von 3–6 Monaten, *critical* = existenzielles oder nahezu existenzielles Risiko. Diese Rubrik ist Teil des System-Prompts an den Gap Detector Agent (vgl. `src/aip/agents/`), sodass die Severity-Vergaben über Läufe hinweg vergleichbar bleiben.
+
 **OFH-Verhalten.** Die Dissent Detection identifizierte vier fundamentale Widersprüche zwischen den Agenten — ein Indikator für ein konzeptionell reichhaltiges Problem, in dem die Agenten unterschiedliche Diagnosen aus denselben Daten ableiteten. Die vier `DissensSignal`-Outputs lauteten (Divergence-Score in Klammern):
 
 1. **Root cause of churn acceleration** (0,75) — Audit Agent vs. Market Scanner: Customer-Success-Versagen vs. Produktlücke. Der Critique-Agent extrahierte ein „perceived value bridge"-Konstrukt als Hybrid-Innovation: leichtgewichtige AI-Insights, proaktiv durch eine CS-Schicht surfacet, die Zeit für tiefere Produktentwicklung schaffen.
@@ -489,9 +505,9 @@ Das Profil bildet einen typischen Fall ab: ein SaaS-Startup mit solider Technolo
 3. **Priority Sequencing AI vs. Churn Reduction** (0,70) — Audit Agent vs. Gap Detector. Innovationspotenzial: ein „retention-led product development"-Modell, das CS-Gespräche mit gefährdeten Accounts in Roadmap-Co-Design verwandelt.
 4. **Viability des Enterprise-Tiers** (0,65) — Audit Agent vs. Gap Detector. Innovationspotenzial: ein „compliance-first mid-market"-Tier zwischen gescheitertem Enterprise und generischem Mid-Market.
 
-**Gate-Entscheidung.** Der Spokesperson Agent fasste die vier Dissens-Signale **nicht** zu einer Mehrheitsmeinung zusammen, sondern propagierte sie explizit in die `GateDecision` (`gate: "A→B"`, `decision: "go"`, `confidence: 0.87`). Die Begründung des Gates dokumentierte die Dissens-Signale als „innovation-grade tensions, die als strukturierte Hypothesen in Phase B getragen werden müssen — nicht aufgelöst werden vor der Exploration". Damit ist der zentrale Mechanismus der Arbeit — Dissens-als-Innovationssignal — am ausgeführten Lauf empirisch sichtbar geworden.
+**Gate-Entscheidung.** Der Spokesperson Agent fasste die vier Dissens-Signale **nicht** zu einer Mehrheitsmeinung zusammen, sondern propagierte sie explizit in die `GateDecision` (`gate: "A→B"`, `decision: "go"`, mit einer **selbstberichteten Spokesperson-Konfidenz von 0,87**). Diese Konfidenz ist eine LLM-Selbstauskunft, kein kalibriertes Maß; sie erlaubt eine relative Aussage über die Robustheit der Entscheidung des Spokesperson, ohne empirische Genauigkeitsgarantie. Die Begründung des Gates dokumentierte die Dissens-Signale als „innovation-grade tensions, die als strukturierte Hypothesen in Phase B getragen werden müssen — nicht aufgelöst werden vor der Exploration". Damit ist der zentrale Mechanismus der Arbeit — Dissens-als-Innovationssignal — an einem ausgeführten Demonstrationsfall konkret sichtbar geworden; der empirische Wirksamkeitsnachweis an realen Startups bleibt Folgearbeit (Kap. 7.2).
 
-Da reichhaltiger Dissens vorhanden war, blieb die Ethical Friction inaktiv (kein verdächtiger Konsens). Der vollständige Lauf-Output mit allen typisierten Pydantic-Artefakten liegt im Repository unter `outputs/datapulse_analytics/phase_a_20260430_225037.json`.
+Da reichhaltiger Dissens vorhanden war, blieb die Ethical Friction inaktiv (kein verdächtiger Konsens). Der vollständige Lauf-Output mit allen typisierten Pydantic-Artefakten liegt im Repository unter `outputs/datapulse_analytics/phase_a_20260430_225037.json`. Der Lauf ist reproduzierbar via `python -m aip scenarios/saas_stagnation.json` mit `AIP_PROVIDER=anthropic` und Modell-Pin `claude-sonnet-4-6` (Routing-Tier: `claude-haiku-4-5-20251001`).
 
 ### 5.5 ClientZero-Validierung
 
@@ -572,7 +588,7 @@ Die folgenden Metriken sind aus dem Projektlogbuch, der Git-History und den Arbe
 
 *Tabelle 13: ClientZero — Quantitative Metriken*
 
-Die Kombination aus mittlerem IT-Score (3,49/5), niedrigem Datenreifegrad (Stufe 2) und schwachem Marktbild (2/5) bildet exakt die Konstellation ab, für die das Framework konzipiert wurde: ein ressourcenlimitiertes Setup, in dem Graceful Degradation und Hebel-Fokussierung greifen müssen, damit überhaupt Outputs entstehen. Dass diese Outputs entstanden sind — diese Arbeit, der Prototyp, das V3-Framework — ist der Existenzbeweis für die innere Konsistenz des Frameworks.
+Die Kombination aus mittlerem IT-Score (3,40/5), niedrigem Datenreifegrad (Stufe 2) und schwachem Marktbild (2/5) bildet exakt die Konstellation ab, für die das Framework konzipiert wurde: ein ressourcenlimitiertes Setup, in dem Graceful Degradation und Hebel-Fokussierung greifen müssen, damit überhaupt Outputs entstehen. Dass diese Outputs entstanden sind — diese Arbeit, der Prototyp, das V3-Framework — ist der Existenzbeweis für die innere Konsistenz des Frameworks.
 
 #### 5.5.6 Reflexion: Was ClientZero zeigt — und was nicht
 
@@ -582,21 +598,21 @@ ClientZero zeigt nicht: (1) externe Wirksamkeit auf fremde Startups, (2) statist
 
 ### 5.6 Evaluation gegen Design-Anforderungen
 
-Die folgende Bewertung zeigt, inwieweit der Prototyp die in Kapitel 3.4 definierten Design-Anforderungen erfüllt:
+Die folgende Bewertung zeigt, inwieweit der Prototyp die in Kapitel 3.4 definierten Design-Anforderungen erfüllt. Um die Evaluation evaluativ statt deklarativ zu fassen, wird pro DR ein **Falsifikationskriterium** angegeben — die Bedingung, unter der die Anforderung als verletzt zu werten wäre. Diese Form folgt der Forderung von Hevner et al. (2004, Guideline 3) nach rigoroser Evaluation und macht die Beurteilung intersubjektiv nachvollziehbar.
 
-| DR | Erfüllung | Evidenz |
-|----|:---------:|---------|
-| DR1 (Graceful Degradation) | ✓ | 4-Level-Modell implementiert, ClientZero auf Level 2 funktional |
-| DR2 (Dissens als Signal) | ✓ | `DissensSignal`-Typ mit `divergence_score`, realer Dissens in ClientZero |
-| DR3 (Human-in-the-Loop) | ✓ | Gate-Mechanismus mit Go/Iterate/Kill, Fallback-Eskalation |
-| DR4 (Startup-Adaption) | ✓ | IT-Score berechnet, schwächste Dimension identifiziert |
-| DR5 (Konsens-Warnung) | ✓ | Ethical Friction generiert Reflexionsfragen bei fehlendem Dissens |
-| DR6 (LLM-agnostisch) | ✓ | 4 Provider konfigurierbar ohne Codeänderung |
-| DR7 (Typisierte Outputs) | ✓ | Alle Artefakte als Pydantic-Modelle mit Validierung, 47 automatisierte Tests (inkl. OFH-Kernlogik mit mocked LLM) |
+| DR | Status | Evidenz | Falsifikationskriterium |
+|----|:------:|---------|--------------------------|
+| DR1 Graceful Degradation | ✓ (Phase A) | 4-Level-Modell in `models/startup.py:DataMaturityLevel`, ClientZero produzierte verwertbare Outputs auf Stufe 2 (Kap. 5.5.5) | Wäre verletzt, wenn ein Lauf auf Stufe 1 keine strukturierten Outputs lieferte oder das Framework auf einer Stufe abbrechen würde. |
+| DR2 Dissens als Signal | ✓ | Typisiertes `DissensSignal` mit `divergence_score` (`models/innovation.py:75`), 4 reale Signale im Demonstrationslauf (Kap. 5.4), reales V1/V2-Signal in ClientZero (Kap. 5.5.4) | Wäre verletzt, wenn Dissens-Signale stillschweigend in den Mehrheits-Konsens kollabiert würden, statt als eigene Artefakte in die `GateDecision` zu propagieren. |
+| DR3 Human-in-the-Loop | ✓ | `GateDecision` mit `decision: go/iterate/kill` und `human_override`-Feld; Fallback bei Parse-Fehler erzeugt konservative `iterate`-Eskalation, gepinnt durch `tests/test_ofh.py::test_fallback_on_invalid_json` und `::test_fallback_decision_still_carries_dissent` | Wäre verletzt, wenn das System bei LLM-Fehlern crashte oder autonom eine Gate-Entscheidung träfe, ohne menschliche Override-Möglichkeit. |
+| DR4 Startup-Adaption | ✓ (Phase A) | IT-Score-Berechnung mit konfigurierbarer Gewichtung (Kap. 4.5, `models/startup.py`), automatische Identifikation der schwächsten Dimension; sowohl an DataPulse (IT-Score 2,85) als auch an ClientZero (IT-Score 3,40) demonstriert | Wäre verletzt, wenn das Framework dieselbe Konfiguration auf zwei Startups mit unterschiedlichen Genome-Profilen anwendete. |
+| DR5 Konsens-Warnung | ✓ | `ethical_friction_check` generiert Reflexionsfragen, wenn `detect_dissent` mit niedrigem Schwellenwert (0,2) leer zurückkommt; Verhalten gepinnt in `tests/test_ofh.py::test_generates_reflection_questions_on_consensus` | Wäre verletzt, wenn das Framework bei vollständigem Konsens kommentarlos eine Gate-Entscheidung produzierte, ohne Reflexionsimpuls. |
+| DR6 LLM-Agnostik | ✓ (konstruktiv); ⚠ (empirisch nur an einem Provider belegt) | Vier Provider (`LLMProvider`-Enum in `config.py`), Provider-Wahl per `AIP_PROVIDER` ohne Codeänderung | Wäre verletzt, wenn der Wechsel des Providers Code-Änderungen erforderte oder Pydantic-Schemata nicht erfüllbar wären. Empirischer Cross-Provider-Vergleichslauf ausstehend (Kap. 7.2). |
+| DR7 Typisierte Outputs | ✓ | Alle Artefakte als Pydantic-Modelle mit Field-Validation (`models/`), 47 automatisierte Tests grün, davon 10 für die OFH-Kernlogik | Wäre verletzt, wenn Agent-Outputs als freier Text die nachgelagerten Verarbeitungsschritte verließen, statt als validierte typisierte Objekte. |
 
-*Tabelle 14: Evaluation gegen Design-Anforderungen*
+*Tabelle 14: Evaluation gegen Design-Anforderungen mit Falsifikationskriterien*
 
-Alle sieben Design-Anforderungen werden vom Prototyp adressiert. Einschränkend ist zu bemerken, dass DR1 und DR4 nur für Phase A vollständig demonstriert wurden; die Phasen B–E sind konzeptionell beschrieben, aber nicht prototypisch validiert.
+Alle sieben Design-Anforderungen werden vom Prototyp adressiert; die Falsifikationskriterien zeigen jeweils, woran ein scharfes Versagen erkennbar wäre. DR1 und DR4 sind nur für Phase A vollständig demonstriert — die Phasen B–E sind konzeptionell beschrieben, aber nicht prototypisch validiert (vgl. Scope-Statement Kap. 1.3, Folgearbeit Kap. 7.2). DR6 ist konstruktiv erfüllt (Code-Pfad), aber empirisch nur am Anthropic-Provider belegt; ein Cross-Provider-Vergleichslauf ist im Ausblick adressiert.
 
 ---
 
@@ -628,7 +644,7 @@ Die Antwort auf die Unterfrage ist somit differenziert: Die *Art* der Unterstüt
 
 ### 6.2 Wissenschaftliche Einordnung
 
-Im Sinne der Knowledge Contribution Matrix nach Gregor und Hevner (2013) positioniert sich das AIP-Framework als **Exaptation**: Es wendet reife Lösungsartefakte (Innovationsframeworks, MAS-Orchestrierungsmuster) auf einen neuen Problemraum an (agentische KI in Innovationsprozessen). Die Problemdomäne selbst ist vergleichsweise neu — agentische KI-Systeme sind erst seit 2023 praktisch einsetzbar (Weng, 2023) —, während die Lösungsbausteine auf jahrzehntelanger Forschung basieren (Cooper, 1990; Ries, 2011; Osterwalder & Pigneur, 2010).
+Im Sinne der Knowledge Contribution Matrix nach Gregor und Hevner (2013) positioniert sich das AIP-Framework auf zwei Ebenen, wie in Kap. 3.1 hergeleitet: **Exaptation** auf der Framework-Ebene (Übertragung etablierter Innovationsmodelle in den neuen Problemraum agentischer KI) und **Improvement** auf der Konstrukt-Ebene (OFH, Dissens-als-Innovationssignal, IT-Score, Ethical Friction, ClientZero als neuartige Bausteine zur Lösung der Multi-Agent-Governance-Herausforderung in Innovationsprozessen). Die Problemdomäne selbst ist vergleichsweise neu — agentische KI-Systeme sind erst seit 2023 praktisch einsetzbar (Weng, 2023) —, während die Framework-Lösungsbausteine auf jahrzehntelanger Forschung basieren (Cooper, 1990; Ries, 2011; Osterwalder & Pigneur, 2010). Die Improvement-Anteile schließen genau die Lücke, die durch das Aufeinandertreffen alter Lösungsbausteine mit neuer Problemdomäne entsteht.
 
 Der spezifische wissenschaftliche Beitrag liegt in fünf neuartigen Konstrukten, die keines der analysierten Frameworks bietet:
 
@@ -719,6 +735,8 @@ Cooper, R. G. (1990). Stage-Gate Systems: A New Tool for Managing New Products. 
 Dalkey, N. & Helmer, O. (1963). An Experimental Application of the Delphi Method to the Use of Experts. *Management Science*, 9(3), 458–467.
 
 Deloitte. (2025). *AI agents and multiagent systems*. Deloitte Consulting.
+
+Denzin, N. K. (1978). *The Research Act: A Theoretical Introduction to Sociological Methods* (2. Aufl.). McGraw-Hill.
 
 Füller, J., Tekic, Z. & Hutter, K. (2024). Rethinking Innovation Management — How AI Is Changing the Way We Innovate. Unveröffentlichtes Manuskript, eingereicht bei *California Management Review*.
 

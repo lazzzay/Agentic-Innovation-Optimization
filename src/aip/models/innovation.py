@@ -18,13 +18,30 @@ class InnovationClass(str, Enum):
 
 
 class InnovationGap(BaseModel):
-    """An identified gap between current state and market potential."""
+    """An identified gap between current state and market potential.
+
+    Severity rubric (used by agents to assign the severity field):
+      - low      : noticeable but no immediate revenue / retention impact;
+                   addressable in normal product cycles.
+      - medium   : measurable competitive / customer impact within 6-12 months
+                   if unaddressed; bounded scope.
+      - high     : material risk to growth, retention, or differentiation
+                   within 3-6 months; touches a core BMC block.
+      - critical : existential or near-existential risk (e.g. product becomes
+                   competitively obsolete, accelerating churn that compounds);
+                   warrants immediate intervention.
+    """
 
     title: str = Field(description="Short gap description")
     description: str = Field(description="Detailed analysis of the gap")
     evidence: list[str] = Field(description="Supporting data points or observations")
     severity: Literal["low", "medium", "high", "critical"] = Field(
-        description="How significant is this gap"
+        description=(
+            "Severity following the four-level rubric in this class' docstring: "
+            "low = no immediate impact; medium = measurable impact within 6-12 months; "
+            "high = material risk to a core BMC block within 3-6 months; "
+            "critical = existential or near-existential risk."
+        )
     )
     source_block: str = Field(
         default="",
