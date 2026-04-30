@@ -18,23 +18,24 @@
 | P7 | Multi-Provider-Support | DONE | 10.04. | Anthropic, OpenAI, Google, Ollama — eine Zeile .env |
 | P8 | Szenario 1 (SaaS Stagnation) | DONE | 10.04. | DataPulse Analytics, Level 3 |
 | P9 | CLI mit Rich-Output | DONE | 10.04. | python -m aip scenario.json |
-| P10 | Phase B (AUSRICHTEN) | OFFEN | | JTBD-Extractor, Opportunity-Scorer, Strategy-Synthesizer |
-| P11 | Phase C (IDEIEREN) | OFFEN | | Ideation, Evaluation, Hypothesis Agents |
-| P12 | Szenario 2 (Datenreifegrad 1) | OFFEN | | Graceful Degradation demonstrieren |
-| P13 | Erster Live-Run Phase A | OFFEN | | Braucht API-Key in .env |
-| P14 | Outputs dokumentieren | OFFEN | | Ergebnisse für die Arbeit aufbereiten |
+| P10 | Phase B (AUSRICHTEN) | SCOPE-CUT | 29.04. | Paper-Scope (vgl. Kap. 7.2 PROJEKTARBEIT.md) |
+| P11 | Phase C (IDEIEREN) | SCOPE-CUT | 29.04. | Paper-Scope |
+| P12 | Szenario 2 (Datenreifegrad 1) | SCOPE-CUT | 29.04. | Paper-Scope |
+| P13 | Erster Live-Run Phase A | SCOPE-CUT | 29.04. | Paper-Scope; ClientZero ist die Validierung der Projektarbeit |
+| P14 | Outputs dokumentieren | DONE | 29.04. | ClientZero-Metriken in Kap. 5.5.5 (Tabelle 13) |
 
 ## Strang 2: Arbeit schreiben
 
 | # | Aufgabe | Status | Datum | Notizen |
 |---|---------|--------|-------|---------|
-| A1 | Kap. 1 — Einleitung | OFFEN | | 4-5 Seiten, keine Abhängigkeit |
-| A2 | Kap. 2 — Theoretische Grundlagen | OFFEN | | 7-8 Seiten, Literatur liegt vor |
-| A3 | Kap. 3 — Methodik | OFFEN | | 5-6 Seiten |
-| A4 | Kap. 4 — AIP Framework | OFFEN | | 10-12 Seiten, basiert auf V3.md |
-| A5 | Kap. 5 — Ergebnisse & Diskussion | OFFEN | | Braucht Szenario-Ergebnisse |
-| A6 | Kap. 6 — Fazit & Ausblick | OFFEN | | Braucht Kap. 5 |
-| A7 | Formalia (Deckblatt, Verz., Format) | OFFEN | | |
+| A1 | Kap. 1 — Einleitung | DONE | 10.04. | inkl. Scope-Statement (Kap. 1.3) ergänzt 29.04. |
+| A2 | Kap. 2 — Theoretische Grundlagen | DONE | 10.04. | Bewertungsmatrix-Reframe 29.04. |
+| A3 | Kap. 3 — Methodik | DONE | 10.04. | Triangulation aktualisiert 29.04. (Szenario raus, ClientZero zentral) |
+| A4 | Kap. 4 — AIP Framework | DONE | 10.04. | basiert auf V3.md |
+| A5 | Kap. 5 — Implementierung & ClientZero-Validierung | DONE | 29.04. | 5.4 als illustrativer Walkthrough; 5.5 ClientZero auf 6 Unterabschnitte ausgebaut |
+| A6 | Kap. 6 — Diskussion & Limitationen | DONE | 10.04. | Beantwortung der Forschungsfrage scope-konsistent 29.04. überarbeitet |
+| A7 | Kap. 7 — Fazit & Ausblick | DONE | 10.04. | klare Trennung Projektarbeit-Scope vs. Paper-Scope ergänzt 29.04. |
+| A8 | Formalia (Deckblatt, Verz., eidesstattliche Erklärung) | OFFEN | | finaler Schritt vor PDF-Export |
 
 ## Tech-Stack
 

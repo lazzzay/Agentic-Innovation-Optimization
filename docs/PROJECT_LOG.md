@@ -11,8 +11,8 @@
 | **Arbeitstitel** | Agentic AI zur Optimierung von Innovationsprozessen in Startups mit ungenutztem Innovationspotenzial |
 | **Typ** | Projektarbeit (ggf. Paper) |
 | **Institution** | HTWG |
-| **Zeitrahmen** | ~1 Monat (Start: 26.03.2026) |
-| **Deadline** | ca. 26.04.2026 |
+| **Zeitrahmen** | ~2 Monate (Start: 26.03.2026, ~Ende Mai 2026) |
+| **Deadline** | ca. Ende Mai 2026 (Stand 29.04.: noch ~1 Monat verfügbar) |
 | **Kernfrage** | Wie können agentische KI-Systeme bewährte Innovationsframeworks auf die Datenbasis von Startups mit ungenutztem Innovationspotenzial anwenden, um Stellhebel für Innovation zu identifizieren? |
 
 ---
@@ -39,27 +39,27 @@
 
 | # | Aufgabe | Status | Notizen |
 |---|---------|--------|---------|
-| 2.1 | Agentisches System konzipieren & implementieren | OFFEN | Architektur + Techstack |
-| 2.2 | Testdaten / Unternehmensdaten beschaffen | OFFEN | Reale oder synthetische Daten |
-| 2.3 | Versuchsreihen durchführen | OFFEN | Framework auf Daten anwenden lassen |
-| 2.4 | Ergebnisse auswerten & dokumentieren | OFFEN | Quantitativ + Qualitativ |
-| 2.5 | Arbeit schreiben: Einleitung & Grundlagen | OFFEN | |
-| 2.6 | Arbeit schreiben: Methodik & Umsetzung | OFFEN | |
-| 2.7 | Arbeit schreiben: Ergebnisse & Diskussion | OFFEN | |
-| 2.8 | Arbeit schreiben: Fazit & Ausblick | OFFEN | |
+| 2.1 | Agentisches System konzipieren & implementieren | DONE | Python + LangGraph + Pydantic; Phase A komplett (`src/aip/`); Multi-Provider |
+| 2.2 | Testdaten / Unternehmensdaten beschaffen | SCOPE-CUT | Externe Startup-Daten = Paper-Scope; ClientZero nutzt das Forschungsprojekt selbst als Datengrundlage |
+| 2.3 | Versuchsreihen durchführen | SCOPE-CUT | Live-Runs gegen externe Startups = Paper-Scope; ClientZero-Selbstdurchlauf ist die Validierung der Projektarbeit |
+| 2.4 | Ergebnisse auswerten & dokumentieren | DONE | ClientZero-Metriken (Tabelle 13), IT-Score = 3,49/5, 1 reales Dissens-Signal |
+| 2.5 | Arbeit schreiben: Einleitung & Grundlagen | DONE | Kap. 1 + Kap. 2 vollständig in PROJEKTARBEIT.md |
+| 2.6 | Arbeit schreiben: Methodik & Umsetzung | DONE | Kap. 3 + Kap. 4 + Kap. 5 vollständig |
+| 2.7 | Arbeit schreiben: Ergebnisse & Diskussion | DONE | Kap. 5.5 (ClientZero) + Kap. 6 vollständig |
+| 2.8 | Arbeit schreiben: Fazit & Ausblick | DONE | Kap. 7 mit klarer Trennung Projektarbeit-Scope vs. Paper-Scope |
 
-### Phase 3: FINALIZATION (KW 17-18 | 20.04. - 26.04.)
+### Phase 3: FINALIZATION (KW 17-18 | 20.04. - 26.04. | tatsächlich noch in 04/2026)
 
 **Ziel:** Qualitätssicherung, Korrekturen, Abgabe
 
 | # | Aufgabe | Status | Notizen |
 |---|---------|--------|---------|
-| 3.1 | Inhaltliche Prüfung: Logik, Argumentation, Vollständigkeit | OFFEN | |
+| 3.1 | Inhaltliche Prüfung: Logik, Argumentation, Vollständigkeit | DONE | A/B-Audit (29.04.) + Block-1-3-Edits (DataPulse-Reframe, Scope-Statements, ClientZero-Ausbau, Bewertungsmatrix-Reframe) |
 | 3.2 | Formale Prüfung: Zitation, Formatierung, Sprache | OFFEN | |
 | 3.3 | Plagiatsprüfung | OFFEN | |
 | 3.4 | Peer Review / Feedback einarbeiten | OFFEN | |
-| 3.5 | Finale Version erstellen | OFFEN | |
-| 3.6 | Abgabe | OFFEN | |
+| 3.5 | Finale Version erstellen | OFFEN | inkl. eidesstattliche Erklärung, Deckblatt-Finalisierung, PDF-Export |
+| 3.6 | Abgabe | OFFEN | Deadline ca. Ende Mai 2026, ~1 Monat Zeitfenster ab 29.04. |
 
 ---
 
@@ -99,6 +99,17 @@
 | 27.03.2026 | L6 erweitert: Ethical Friction eingeführt | Proaktiver Groupthink-Schutz; nur bei ~100% Konsens; Denkanstoß, kein Veto |
 | 27.03.2026 | Phase 1 (IDEATION) abgeschlossen | Alle Aufgaben erledigt; Framework V3 vollständig; Abstract geschrieben |
 | 04.04.2026 | Prof-Feedback eingearbeitet: Fokussierung auf Kernbeitrag | Pyramidenstruktur: Adaptive Orchestrierung als Kern; OFH/Dissens (Steuerung) + Genome/IT-Score (Anpassung) + Second Brain/Ethical Friction (Lernen) als Ebenen |
+| 10.04.2026 | Prototyp-Architektur: Python + LangGraph + Pydantic, LLM-agnostisch | SOTA-Stack für MAS; Checkpointing, typed state, Multi-Provider per .env; Phase A vollständig |
+| 29.04.2026 | Scope-Klarstellung: ClientZero = Validierungssäule der Projektarbeit | Externe Validierung, Phase B–E vollständig, Live-Runs gegen fremde Startups → Paper-Scope; PROJEKTARBEIT.md entsprechend re-fokussiert |
+| 29.04.2026 | A/B-Audit durchgeführt (Verteidiger vs. Gutachter) | Identifizierte Schwächen: DataPulse als Faktentäuschung wirkend, ClientZero zu dünn, Bewertungsmatrix methodisch wackelig |
+| 29.04.2026 | Block-1-3-Edits in PROJEKTARBEIT.md | DataPulse als illustrativen Walkthrough gerahmt; Scope-Statements in Kap. 1.3, 6.1, 7.2; ClientZero (Kap. 5.5) auf 6 Unterabschnitte mit IT-Score-Berechnung, Phasenanwendung, Dissens-Rekonstruktion und Metriken ausgebaut; Bewertungsmatrix als argumentative Vorauswahl gerahmt |
+| 29.04.2026 | Deadline auf ca. Ende Mai 2026 korrigiert | Vorherige Annahme „Deadline 26.04." war Schätzung aus 1-Monat-Ursprungsplan; tatsächlicher Zeitrahmen ~2 Monate, ~1 Monat Restzeit ab 29.04. |
+| 29.04.2026 | Plan für Restzeit erstellt | Vier Wochen-Blöcke: Substanz härten (W1) → Methodische Tiefe (W2) → Polish (W3) → Finalisierung (W4); detaillierte Tasks in Task-Tracker |
+| 30.04.2026 | OFH-Tests ergänzt | 10 neue Tests mit mocked LLM für Dissent Detection, Spokesperson Synthesis, Ethical Friction; insgesamt 47/47 Tests grün; Fix: pyproject.toml `pythonpath = ["src"]` für editable-install ohne Newline-`.pth` |
+| 30.04.2026 | Quellen-Hygiene-Pass | Graue Beratungsliteratur (Gartner, McKinsey, Deloitte, G2, Bain, Palo Alto, MIT-BCG) im Fließtext explizit als Marktindikatoren / Beratungsanalysen gekennzeichnet |
+| 30.04.2026 | Kapitel-Review Inkonsistenzen behoben | IT-Score-Gewichte-Bug (Kap. 5.5.2) korrigiert auf 10/20/15/20/10/25 % gemäß Code → IT-Score = 3,40/5; DataPulse-Reframe-Konsistenz in Kap. 3.3, 6.1, 6.5 hergestellt; Kap. 7.1 Klassifikationsfehler (4 Frameworks + 1 Linse statt 5) korrigiert |
+| 30.04.2026 | Abbildungen auf Mermaid umgestellt | Abb. 1 (OFH-Architektur, Kap. 4.3) und Abb. 2 (AIP-Phasenmodell, Kap. 4.6) als Mermaid-Diagramme statt ASCII; rendert in GitHub/Pandoc/modernen PDF-Toolchains |
+| 30.04.2026 | Verzeichnisse + BUILD-Anleitung ergänzt | Abbildungsverzeichnis, Tabellenverzeichnis, Abkürzungsverzeichnis nach Abstract; `docs/BUILD.md` mit drei Pandoc-PDF-Export-Varianten (simpel / mit Mermaid / vollständig mit BibTeX) |
 
 ---
 

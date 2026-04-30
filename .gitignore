@@ -24,6 +24,12 @@ Thumbs.db
 checkpoints/
 outputs/
 
+# Build-Artefakte (PDF, Mermaid-Renderings)
+build/
+docs/PROJEKTARBEIT.md.bak.*
+mermaid-filter.err
+*.mermaid-rendered/
+
 # Claude Code / Flow (nicht committen)
 .claude/
 .claude-flow/
