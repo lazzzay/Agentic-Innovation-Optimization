@@ -24,27 +24,44 @@ class LLMOutputParseError(Exception):
 def extract_json(text: str) -> str:
     """Extract JSON from LLM output, handling markdown code blocks and preamble.
 
-    LLMs sometimes wrap JSON in ```json ... ``` blocks, or add text before/after.
-    This function robustly extracts the JSON content.
+    LLMs differ in how they wrap structured outputs:
+      - Anthropic typically returns raw JSON.
+      - Gemini and others often wrap it in ```json ... ``` fences, sometimes
+        with surrounding prose, sometimes without a closing fence (truncation).
+      - Some prepend prose like "Here is the result:\\n```json\\n{...}".
+
+    The strategy is: peel off any leading/trailing markdown fences, then either
+    return the result if it already starts with a JSON token, or fall through
+    to bracket-matched scan that picks the outermost balanced object/array.
     """
     text = text.strip()
 
-    # Case 1: Markdown code block (```json ... ``` or ``` ... ```)
-    code_block = re.search(r"```(?:json)?\s*\n?(.*?)```", text, re.DOTALL)
-    if code_block:
-        return code_block.group(1).strip()
+    # If the text begins with a markdown fence, strip both the leading fence
+    # and any matching trailing fence (plus any prose after it). We only do
+    # this when the fence is at the very start, otherwise a stray ``` mid-text
+    # would over-strip into the JSON region.
+    if text.startswith("```"):
+        text = re.sub(r"^```[ \t]*(?:json|JSON)?[ \t]*\n?", "", text)
+        text = re.sub(r"\n?[ \t]*```.*\Z", "", text, flags=re.DOTALL)
+        text = text.strip()
 
-    # Case 2: Already starts with { or [ — likely raw JSON
+    # Already JSON.
     if text.startswith(("{", "[")):
         return text
 
-    # Case 3: JSON embedded in text — find the outermost { } or [ ]
-    # Check [ before { so that arrays are matched as whole arrays, not inner objects
-    for start_char, end_char in [("[", "]"), ("{", "}")]:
-        start = text.find(start_char)
-        if start == -1:
-            continue
-        # Find the matching closing bracket
+    # JSON embedded in prose — pick the first occurring opener and
+    # bracket-match it. Sorting by position handles array-with-preamble
+    # vs. nested-object cases without a fixed precedence.
+    candidates: list[tuple[int, str, str]] = []
+    obj_pos = text.find("{")
+    arr_pos = text.find("[")
+    if obj_pos != -1:
+        candidates.append((obj_pos, "{", "}"))
+    if arr_pos != -1:
+        candidates.append((arr_pos, "[", "]"))
+    candidates.sort(key=lambda c: c[0])
+
+    for start, start_char, end_char in candidates:
         depth = 0
         in_string = False
         escape_next = False
@@ -67,7 +84,7 @@ def extract_json(text: str) -> str:
                 if depth == 0:
                     return text[start : i + 1]
 
-    # Nothing worked — return as-is and let the caller handle the error
+    # Nothing worked — return as-is and let the caller raise.
     return text
 
 

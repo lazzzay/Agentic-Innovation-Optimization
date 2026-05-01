@@ -40,6 +40,26 @@ class TestExtractJson:
         text = 'Here are the signals:\n[{"topic": "x"}]'
         assert extract_json(text) == '[{"topic": "x"}]'
 
+    def test_markdown_fence_without_closing(self):
+        # Gemini sometimes emits a leading ```json fence but no closing fence
+        # (truncation, format drift). The extractor must still recover the JSON.
+        text = '```json\n{"key": "value", "nested": {"a": 1}}'
+        assert extract_json(text) == '{"key": "value", "nested": {"a": 1}}'
+
+    def test_markdown_fence_with_trailing_prose(self):
+        # Some providers append explanatory prose after the closing fence.
+        text = '```json\n{"key": "value"}\n```\nHope this helps!'
+        assert extract_json(text) == '{"key": "value"}'
+
+    def test_uppercase_json_language_tag(self):
+        text = '```JSON\n{"key": "value"}\n```'
+        assert extract_json(text) == '{"key": "value"}'
+
+    def test_markdown_fence_with_leading_prose_and_no_closing(self):
+        # Worst-case Gemini format: leading prose, opening fence, no closing.
+        text = 'Here is the JSON:\n```json\n{"key": "value"}'
+        assert extract_json(text) == '{"key": "value"}'
+
 
 class TestParseJsonOutput:
     def test_valid_json(self):
