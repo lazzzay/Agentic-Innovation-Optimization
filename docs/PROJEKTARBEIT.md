@@ -59,6 +59,8 @@ Startups mit ungenutztem Innovationspotenzial stehen vor einem Dilemma: Etablier
 | Tabelle 12 | ClientZero — Phasenanwendung mit typisierten Outputs | 5.5.3 |
 | Tabelle 13 | ClientZero — Quantitative Metriken | 5.5.5 |
 | Tabelle 14 | Evaluation gegen Design-Anforderungen | 5.6 |
+| Tabelle 15 | Hochgerechnete Vollzyklus-Kosten nach LLM-Konfiguration | 6.4.1 |
+| Tabelle 16 | Indirekte Kosten und Stakeholder-Aufwände | 6.4.2 |
 
 ## Abkürzungsverzeichnis
 
@@ -387,7 +389,7 @@ Der IT-Score (Innovations-Treiber-Score) ist ein gewichteter Komposit-Score übe
 
 *Tabelle 8: IT-Score-Gewichtung mit Rationale*
 
-Die Gewichtung priorisiert Datenreife (25 %) am stärksten, da dieser Faktor direkt das Agent-Verhalten über Layer L1 (Graceful Degradation) steuert. Kultur und Technologie (je 20 %) folgen als zentrale interne Innovationstreiber. Die Gewichtung ist konfigurierbar und sollte in zukünftiger Forschung empirisch kalibriert werden (vgl. Kap. 6.4).
+Die Gewichtung priorisiert Datenreife (25 %) am stärksten, da dieser Faktor direkt das Agent-Verhalten über Layer L1 (Graceful Degradation) steuert. Kultur und Technologie (je 20 %) folgen als zentrale interne Innovationstreiber. Die Gewichtung ist konfigurierbar und sollte in zukünftiger Forschung empirisch kalibriert werden (vgl. Kap. 6.5).
 
 Der IT-Score identifiziert automatisch die schwächste Dimension als größten Hebel für Innovation. Das Framework priorisiert Empfehlungen entsprechend: Ein Startup mit schwacher Innovationskultur (Kultur = 1) erhält andere Handlungsempfehlungen als eines mit starker Kultur aber schwacher Technologie.
 
@@ -538,7 +540,7 @@ Die ClientZero-Anwendung ist die zentrale Validierungssäule dieser Arbeit (Kap.
 
 #### 5.5.1 ClientZero-Setup: Das Forschungsprojekt als Startup-Modell
 
-Das Forschungsprojekt wird konzeptionell als „Startup" modelliert: Das *Produkt* ist das AIP-Framework und die wissenschaftliche Arbeit; die *Innovation* ist die systematische Abbildung agentischer KI auf Innovationsphasen; die *Daten* sind Literatur und Arbeitsdokumente; das *Team* besteht aus dem Autor in Kombination mit agentischen KI-Tools (vgl. Reflexivitäts-Anmerkung Kap. 6.5). Diese Modellierung erfüllt die Anforderung von Hevner et al. (2004, Guideline 3) zur Artefakt-Evaluation durch Anwendung — und sie zwingt das Framework, auf einer realen, ressourcenlimitierten Konstellation zu funktionieren, statt auf einem hypothetischen Profil.
+Das Forschungsprojekt wird konzeptionell als „Startup" modelliert: Das *Produkt* ist das AIP-Framework und die wissenschaftliche Arbeit; die *Innovation* ist die systematische Abbildung agentischer KI auf Innovationsphasen; die *Daten* sind Literatur und Arbeitsdokumente; das *Team* besteht aus dem Autor in Kombination mit agentischen KI-Tools (vgl. Reflexivitäts-Anmerkung Kap. 6.6). Diese Modellierung erfüllt die Anforderung von Hevner et al. (2004, Guideline 3) zur Artefakt-Evaluation durch Anwendung — und sie zwingt das Framework, auf einer realen, ressourcenlimitierten Konstellation zu funktionieren, statt auf einem hypothetischen Profil.
 
 #### 5.5.2 Startup Genome und IT-Score des Forschungsprojekts
 
@@ -683,7 +685,58 @@ Der spezifische wissenschaftliche Beitrag liegt in fünf neuartigen Konstrukten,
 
 **Für die Praxis:** Startup-Gründer und Innovationsberater erhalten mit dem AIP-Framework einen strukturierten Ansatz, der drei praktische Vorteile bietet: (1) Der IT-Score liefert eine schnelle Standortbestimmung mit automatischer Priorisierung der schwächsten Dimension. (2) Die Graceful Degradation senkt die Einstiegshürde — auch ohne umfangreiche Daten liefert das Framework verwertbare Outputs. (3) Die OFH-Gate-Entscheidungen bieten eine qualifizierte Entscheidungsgrundlage, ohne dem Gründer die Entscheidungshoheit zu entziehen.
 
-### 6.4 Boundary Conditions
+### 6.4 Wirtschaftlichkeitsanalyse: Kosten der AIP-Anwendung
+
+Die monetäre Einstiegshürde ist eine zentrale Variable für die praktische Adoption durch ressourcenlimitierte Startups. Der folgende Abschnitt quantifiziert die direkten und indirekten Kosten einer AIP-Anwendung, gestützt auf die zwei in Kap. 5.4 dokumentierten Phase-A-Läufe (Anthropic Sonnet 4.6 und Gemini 2.5 Pro) sowie die ClientZero-Erfahrung.
+
+#### 6.4.1 Direkte LLM-Kosten
+
+Phase A (ERKENNEN) löst sechs LLM-Aufrufe aus: Audit Agent, Market Scanner Agent, Gap Detector Agent, Dissent Detection, Spokesperson Synthesis und — bei verdächtigem Konsens — Ethical Friction. Aus den Logs der ClientZero-Läufe lassen sich Tokenverbräuche ableiten: pro Phase-A-Run rund **30.000–45.000 Input-Tokens** (System-Prompts inkl. JSON-Schemas, Profilkontext und etwaige Retry-Korrektur-Feedbacks) sowie **8.000–12.000 Output-Tokens** (typisierte Pydantic-Artefakte). Bei Anthropic-Sonnet-4.6-Tarifen (3 USD pro Million Input-Tokens, 15 USD pro Million Output-Tokens, Stand Mai 2026) ergibt sich eine Spanne von **0,20–0,50 USD pro Phase-A-Run**.
+
+Hochgerechnet auf einen vollständigen Fünf-Phasen-Zyklus (A→B→C→D→E) bei vergleichbarer Aufwandsstruktur — geschätzt 22–28 LLM-Aufrufe — fallen pro AIP-Vollzyklus folgende Beträge an:
+
+| LLM-Konfiguration | Kosten pro Vollzyklus (USD) | Eignung |
+|-------------------|:---:|---------|
+| Anthropic Sonnet 4.6 (drei Tiers) | 1,20–2,00 | Höchste Output-Qualität, Standard für anspruchsvolle Anwendungen |
+| Gemini 2.5 Pro (drei Tiers) | 0,50–1,00 | Vergleichbare Qualität, niedrigere Kosten, höhere Output-Variabilität |
+| Anthropic Haiku 4.5 oder Gemini 2.5 Flash | 0,10–0,30 | Schnelle Iteration, leichte Qualitätseinbuße |
+| 3-Tier-Mix (Routing/Reasoning/Critique) | 0,40–1,20 | Default-Konfiguration des Prototyps; Kostenoptimierung |
+
+*Tabelle 15: Hochgerechnete Vollzyklus-Kosten nach LLM-Konfiguration*
+
+Bei einem typischen Innovationsrhythmus von vier bis sechs Vollzyklen pro Jahr resultieren **jährliche LLM-Kosten von etwa 5–60 USD pro Startup** — eine Größenordnung, die für nahezu jedes ressourcenlimitierte Unternehmen vernachlässigbar ist.
+
+#### 6.4.2 Indirekte Kosten und Aufwände
+
+Neben den direkten LLM-Kosten fallen folgende Aufwände an:
+
+| Kostenposition | Aufwand | Anmerkung |
+|---------------|---------|-----------|
+| Initialer Setup (Repository, venv, API-Key, .env) | 2–4 Stunden | einmalig; setzt grundlegende Python-Vertrautheit voraus |
+| Datenaufbereitung Eingabe-Profil | 1 Stunde (L1) bis 1–2 Wochen (L4) | abhängig vom Datenreifegrad; Graceful Degradation senkt Vorbereitungsaufwand bei niedrigem Reifegrad |
+| Menschliche Validierung an Gates | 30–60 Minuten pro Gate | Gründer- bzw. Stakeholder-Zeit; vier Gates pro Vollzyklus → 2–4 Stunden |
+| Infrastruktur (Hosting, Monitoring, optional) | vernachlässigbar | Framework läuft lokal; optionaler LangGraph-Cloud-Deployment für Team-Zugang |
+| Iterations- und Lernaufwand | variabel | erste 1–2 Zyklen mit höherem Lernkurven-Aufwand |
+
+*Tabelle 16: Indirekte Kosten und Stakeholder-Aufwände*
+
+#### 6.4.3 ClientZero als Referenzfall
+
+Die Anwendung des AIP-Frameworks auf das eigene Forschungsprojekt (ClientZero, vgl. Kap. 5.5) liefert den am detailliertesten dokumentierten Datenpunkt:
+
+- **Direkte LLM-Kosten** für die zwei dokumentierten Phase-A-Läufe (Anthropic + Gemini): unter 1 USD insgesamt.
+- **Setup-Aufwand**: rund einen Personentag für Repository-Aufbau, Konfiguration, Test-Suite-Etablierung.
+- **Konzeptioneller Forschungsaufwand** (Framework-Synthese, Konstrukt-Entwicklung, drei Iterationen V1→V2→V3): rund fünf Wochen — dieser Aufwand ist jedoch **nicht typisch** für eine reguläre Anwendung, sondern ist Teil der Forschungsarbeit selbst und gehört konzeptionell auf die Investitionsseite des Frameworks, nicht auf die Anwendungsseite.
+
+Für eine reguläre Erst-Anwendung durch ein Startup mit etablierter Datenbasis ist die untere Schranke **etwa ein Personentag Setup plus 0,30–0,80 USD pro Phase-A-Run** zu erwarten.
+
+#### 6.4.4 Vergleichseinordnung
+
+Klassische Innovations- und Strategieberatung kostet je nach Engagement-Tiefe und Anbieter zwischen rund 10.000 EUR (Solo-Beratung über drei bis sechs Monate) und 200.000 EUR oder mehr (Strategy-Boutique-Engagement bei großen Häusern). Das AIP-Framework ist *kein direkter Substitut* für solche Engagements — es liefert keinen externen Sparringspartner und keine markterfahrene Senior-Beratungsperspektive. Es stellt jedoch eine **um zwei bis vier Größenordnungen günstigere Variante** für die strukturelle Innovationsanalyse zur Verfügung, die Startups über Monate und Jahre kontinuierlich anwenden können, statt punktuelle Beratungsleistung einzukaufen. In Kombination mit gelegentlicher externer Beratung an strategischen Schlüsselpunkten ergibt sich ein hybrides Modell, das insbesondere für Startups mit Innovationsstagnation und begrenztem Budget attraktiv ist.
+
+Der wirtschaftliche Hauptbeitrag des AIP-Frameworks liegt damit nicht in der Kostensenkung *gegenüber* Beratung, sondern in der **Senkung der Einstiegshürde für strukturierte Innovationsarbeit** — das Framework macht systematische Innovationsanalyse für ein Marktsegment zugänglich, das bisher zwischen unstrukturierter Eigenleistung und kostenintensiver externer Beratung eingeklemmt war.
+
+### 6.5 Boundary Conditions
 
 Das AIP-Framework erhebt keinen Anspruch auf universelle Anwendbarkeit. Folgende Grenzbedingungen definieren den Geltungsbereich:
 
@@ -692,7 +745,7 @@ Das AIP-Framework erhebt keinen Anspruch auf universelle Anwendbarkeit. Folgende
 - **Technische Voraussetzung:** Das Framework setzt den Zugang zu einem leistungsfähigen LLM voraus (mindestens GPT-4-Niveau). Die Qualität der Agent-Outputs korreliert direkt mit der Modellqualität.
 - **IT-Score-Gewichtung:** Die in Tabelle 8 definierten Gewichte basieren auf der Literaturanalyse und Plausibilitätsüberlegungen, nicht auf empirischer Kalibrierung. Zukünftige Forschung sollte die Gewichte anhand einer größeren Startup-Stichprobe validieren.
 
-### 6.5 Limitationen
+### 6.6 Limitationen
 
 Die Arbeit unterliegt folgenden Limitationen:
 
@@ -847,7 +900,7 @@ Yin, R. K. (2018). *Case Study Research and Applications: Design and Methods* (6
 
 Hiermit erkläre ich, dass ich die vorliegende Projektarbeit selbständig und ohne Benutzung anderer als der angegebenen Hilfsmittel verfasst habe. Alle Stellen, die wörtlich oder sinngemäß aus veröffentlichten oder unveröffentlichten Schriften entnommen wurden, sind als solche kenntlich gemacht. Die Arbeit hat in gleicher oder ähnlicher Form noch keiner anderen Prüfungsbehörde vorgelegen.
 
-Bei der Erstellung dieser Arbeit habe ich agentische KI-Tools (insbesondere *Anthropic Claude*) eingesetzt. Diese Nutzung ist methodisch reflektiert (vgl. Kap. 6.5, Reflexivitäts-Anmerkung) und steht in unmittelbarem Zusammenhang mit dem Forschungsgegenstand selbst (ClientZero-Strategie). Alle inhaltlichen Entscheidungen, die Argumentationsstruktur, die Quellenauswahl, die theoretischen Beiträge sowie die finale Formulierung der wissenschaftlichen Aussagen liegen in meiner Verantwortung als Autor.
+Bei der Erstellung dieser Arbeit habe ich agentische KI-Tools (insbesondere *Anthropic Claude*) eingesetzt. Diese Nutzung ist methodisch reflektiert (vgl. Kap. 6.6, Reflexivitäts-Anmerkung) und steht in unmittelbarem Zusammenhang mit dem Forschungsgegenstand selbst (ClientZero-Strategie). Alle inhaltlichen Entscheidungen, die Argumentationsstruktur, die Quellenauswahl, die theoretischen Beiträge sowie die finale Formulierung der wissenschaftlichen Aussagen liegen in meiner Verantwortung als Autor.
 
 Konstanz, den ‹TODO: Abgabedatum einsetzen›
 
